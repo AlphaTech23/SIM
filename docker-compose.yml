@@ -1,0 +1,21 @@
+services:
+  
+    
+      
+  backend:
+    build:
+      context: ./Sim
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./Sim:/app
+      - maven_cache:/root/.m2
+      - spring_boot_gradle_cache:/root/.gradle
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+volumes:
+  maven_cache:
+  spring_boot_gradle_cache:
+  
