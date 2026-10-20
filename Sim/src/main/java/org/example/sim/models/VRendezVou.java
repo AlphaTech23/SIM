@@ -5,10 +5,6 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
-import com.fasterxml.jackson.databind.JsonNode;
 
 @Setter
 @Getter
@@ -21,37 +17,6 @@ public class VRendezVou  {
 	private Integer idRendezVous;
 	@Column(name="id_demandeur", unique = false, nullable = true)
 	private Integer idDemandeur;
-	@Column(name="id_sujet_demandeur", unique = false, nullable = true)
-	private Integer idSujetDemandeur;
-	@Column(name="libele_sujet_demandeur", unique = false, nullable = true)
-	@Size(max = 200)
-	private String libeleSujetDemandeur;
-	@Column(name="description_sujet_demandeur", unique = false, nullable = true)
-	@Size(max = 2147483647)
-	private String descriptionSujetDemandeur;
-	@Column(name="nom_demandeur", unique = false, nullable = true)
-	@Size(max = 100)
-	private String nomDemandeur;
-	@Column(name="prenom_demandeur", unique = false, nullable = true)
-	@Size(max = 100)
-	private String prenomDemandeur;
-	@Column(name="fonction_demandeur", unique = false, nullable = true)
-	@Size(max = 150)
-	private String fonctionDemandeur;
-	@Column(name="telephone_demandeur", unique = false, nullable = true)
-	@Size(max = 30)
-	private String telephoneDemandeur;
-	@Column(name="email_demandeur", unique = false, nullable = true)
-	@Size(max = 150)
-	private String emailDemandeur;
-	@Column(name="whatsapp_demandeur", unique = false, nullable = true)
-	@Size(max = 30)
-	private String whatsappDemandeur;
-	@Column(name="adresse_demandeur", unique = false, nullable = true)
-	@Size(max = 2147483647)
-	private String adresseDemandeur;
-	@Column(name="id_membre_demandeur", unique = false, nullable = true)
-	private Integer idMembreDemandeur;
 	@Column(name="membre_demandeur", unique = false, nullable = true)
 	@Size(max = 200)
 	private String membreDemandeur;
@@ -152,11 +117,12 @@ public class VRendezVou  {
 	@Column(name="remarque", unique = false, nullable = true)
 	@Size(max = 2147483647)
 	private String remarque;
-	@JdbcTypeCode(SqlTypes.JSON)
-	@Column(name = "historique_statuts", columnDefinition = "jsonb")
-	private JsonNode historiqueStatuts;
-	@JdbcTypeCode(SqlTypes.JSON)
-	@Column(name = "creneaux", columnDefinition = "jsonb")
-	private JsonNode creneaux;
+	@Column(name="historique_statuts", unique = false, nullable = true)
+	@org.hibernate.annotations.ColumnTransformer(read = "CAST(historique_statuts as varchar)", write = "CAST(? as jsonb)")
+	private String historiqueStatuts;
+	@Column(name="creneaux", unique = false, nullable = true)
+	@org.hibernate.annotations.ColumnTransformer(read = "CAST(creneaux as varchar)", write = "CAST(? as jsonb)")
+	private String creneaux;
+	
 
 }

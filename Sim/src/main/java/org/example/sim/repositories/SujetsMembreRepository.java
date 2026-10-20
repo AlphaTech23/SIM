@@ -15,6 +15,6 @@ public interface SujetsMembreRepository extends JpaRepository<SujetsMembre, Inte
 List<SujetsMembre> findByIdmembreMembres(Membre idmembreMembres);
 List<SujetsMembre> findByIdsujetSujets(Sujet idsujetSujets);
 
-
+SujetsMembre findByIdmembreMembresAndIdsujetSujets(Membre idmembreMembres, Sujet idsujetSujets);
 
 }
