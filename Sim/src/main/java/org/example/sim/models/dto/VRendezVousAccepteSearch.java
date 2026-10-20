@@ -13,23 +13,6 @@ public class VRendezVousAccepteSearch {
 	private Integer idDemandeurMin;
 	private Integer idDemandeurMax;
 
-	private Integer idSujetDemandeur;
-	private Integer idSujetDemandeurMin;
-	private Integer idSujetDemandeurMax;
-
-	private String libeleSujetDemandeur;
-	private String descriptionSujetDemandeur;
-	private String nomDemandeur;
-	private String prenomDemandeur;
-	private String fonctionDemandeur;
-	private String telephoneDemandeur;
-	private String emailDemandeur;
-	private String whatsappDemandeur;
-	private String adresseDemandeur;
-	private Integer idMembreDemandeur;
-	private Integer idMembreDemandeurMin;
-	private Integer idMembreDemandeurMax;
-
 	private String membreDemandeur;
 	private String logoDemandeur;
 	private String telephoneMembreDemandeur;
