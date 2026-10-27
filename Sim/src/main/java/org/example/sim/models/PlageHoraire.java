@@ -18,11 +18,9 @@ public class PlageHoraire  {
 	@JoinColumn(name="id_rendez_vous")
 	@NotNull(message = "IdRendezVous cannot be null")
 	private RendezVou idrendezvousRendezVous;
-	@Column(name="jour_debut", unique = false, nullable = false)
-	@NotNull(message = "JourDebut cannot be null")
+	@Column(name="jour_debut", unique = false, nullable = true)
 	private java.time.LocalDateTime jourDebut;
-	@Column(name="jour_fin", unique = false, nullable = false)
-	@NotNull(message = "JourFin cannot be null")
+	@Column(name="jour_fin", unique = false, nullable = true)
 	private java.time.LocalDateTime jourFin;
 	
 
