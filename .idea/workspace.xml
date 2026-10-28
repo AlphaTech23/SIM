@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8ea5a4b4-4ea3-458a-9624-beae528cc413" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_fontawesome-svg-core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_fontawesome-svg-core.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_free-brands-svg-icons.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_free-brands-svg-icons.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_free-regular-svg-icons.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_free-regular-svg-icons.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_free-solid-svg-icons.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_free-solid-svg-icons.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_vue-fontawesome.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/@fortawesome_vue-fontawesome.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/_metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimWebapp/.vite/deps/chunk-2CA6TMH7.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.4712798578253372" />
+      <entry key="MS500" value="2.9787333431963856" />
+      <entry key="S2" value="3.6971650259579647" />
+      <entry key="S5" value="3.8744373945687256" />
+      <entry key="S10" value="3.9369157331437266" />
+      <entry key="S30" value="4.552148989729023" />
+      <entry key="S60" value="7.720603237520609" />
+      <entry key="M2" value="14.364609992995925" />
+      <entry key="M5" value="28.290677002961708" />
+      <entry key="M10" value="42.22245838790523" />
+      <entry key="M15" value="49.928958240292424" />
+      <entry key="M30" value="60.189501781308316" />
+      <entry key="H1" value="66.57466324127145" />
+      <entry key="H2" value="70.14628695329345" />
+      <entry key="H4" value="72.03639967536733" />
+      <entry key="D1" value="73.66749892858044" />
+      <entry key="W1" value="73.95236991374495" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.2766662129369795" />
+      <entry key="MS500" value="2.896145663759309" />
+      <entry key="S2" value="3.6712980859556934" />
+      <entry key="S5" value="3.86357433317364" />
+      <entry key="S10" value="3.931393108800681" />
+      <entry key="S30" value="4.549913621465275" />
+      <entry key="S60" value="7.717894274094764" />
+      <entry key="M2" value="14.360653039717155" />
+      <entry key="M5" value="28.28598204407966" />
+      <entry key="M10" value="42.21833286518129" />
+      <entry key="M15" value="49.9255321419243" />
+      <entry key="M30" value="60.187333256503365" />
+      <entry key="H1" value="66.57343614302992" />
+      <entry key="H2" value="70.14563331239378" />
+      <entry key="H4" value="72.03606222839339" />
+      <entry key="D1" value="73.66744115746711" />
+      <entry key="W1" value="73.95236162253609" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="3LHAHIgTOF3tSzrzuSa8R9wXwpv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/aintso/Documents/SIM/endpoint/Sim",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8ea5a4b4-4ea3-458a-9624-beae528cc413" name="Changes" comment="" />
+      <created>1793100538758</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1793100538758</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
