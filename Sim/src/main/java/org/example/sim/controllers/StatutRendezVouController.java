@@ -42,6 +42,7 @@ public class StatutRendezVouController  {
 
 	@Operation(
 	    summary = "Retrieve all statut rendez vou",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of statut rendez vou items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -91,6 +92,7 @@ public class StatutRendezVouController  {
 	}
 	@Operation(
 	    summary = "Retrieve all statut rendez vou",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of statut rendez vou items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -141,6 +143,7 @@ public class StatutRendezVouController  {
 	}
 	@Operation(
 	    summary = "Get statut rendez vou by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific statut rendez vou item by its ID"
 	)
 	@ApiResponses({
@@ -193,6 +196,7 @@ public class StatutRendezVouController  {
 
 	@Operation(
 	    summary = "Create new statut rendez vou",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
  
 	    description = "Create a new statut rendez vou item with the provided information"
 	)
@@ -233,6 +237,7 @@ public class StatutRendezVouController  {
  
 	@Operation(
 	    summary = "Update existing statut rendez vou",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
 	    description = "Update an existing statut rendez vou item with the provided information"
 	)
@@ -279,6 +284,7 @@ public class StatutRendezVouController  {
 
 	@Operation(
 	    summary = "Delete statut rendez vou",
+	    security = { @SecurityRequirement(name = "bearerAuth") },    
 
 	    description = "Delete a statut rendez vou item by its ID. Returns success even if statut rendez vou was already deleted."
 	)

@@ -54,6 +54,12 @@
         >
           <GearIcon class="w-5 h-5" />
         </router-link>
+
+        <UserNavProfile
+          @click="closeDropdown"
+          :name="authStore.getCurrentUsername"
+          :dropdown-direction="{ bottom: true, center: true }"
+        />
       </div>
     </div>
   </nav>
@@ -67,6 +73,10 @@ import HomeIcon from '@/components/icons/HomeIcon.vue'
 import GearIcon from '@/components/icons/GearIcon.vue'
 import AppLogo from '@/components/AppLogo.vue'
 import LanguageSwitcherButton from '@/components/switcher/LanguageSwitcherButton.vue'
+import UserNavProfile from '@/components/user/UserNavProfile.vue'
+import { useAuthenticationStore } from '@/stores/useAuthenticationStore.ts'
+
+const authStore = useAuthenticationStore()
 
 const openSectionIndex = ref<number | null>(null);
 

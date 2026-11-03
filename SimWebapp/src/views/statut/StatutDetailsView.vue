@@ -18,41 +18,31 @@
       </GenesisButton>
     </div>
     <!-- Entity details -->
-    <StatutDetails
-      v-if="entity"
-      :statut="entity"
-    />
-
+    <StatutDetails v-if="entity" :statut="entity" />
     
-    <!-- Child tables tabs -->
-    <div class="tabs tabs-border mt-6 w-full">
-      <input
-        type="radio"
-        name="statut_details_tab"
-        class="tab"
-        :aria-label="$t('entities.statutRendezVou.nav.title')"
-        checked
-      />
-
-      <div class="tab-content border-base-300 bg-base-100 p-4">
-        <EntityTable
-          :entity-model="statutRendezVouEntity"
-          :entity-search-fields="statutRendezVouSearchFields"
-          :default-active-filters="['idstatutStatut']"
-          :searchFn="getStatutRendezVousData"
-          :getPaginationData="statutRendezVouGetPaginationData"
-          :listComponent="StatutRendezVouList"
-          :entities="statutRendezVous"
-          :message="statutRendezVouMessage"
-          :visible-fields="statutRendezVouVisibleListFields"
-          :show-filters="false"
-          :edit-action="false"
-          :remove-action="false"
-          @update:visible-fields="handleUpdateStatutRendezVouVisibleFields"
-        />
-      </div>
-      
+    <div class="tabs tabs-border">
+      <input type="radio" name="details_tab" class="tab" :aria-label="$t('entities.statutRendezVou.nav.title')" checked />
+      <div class="tab-content card bg-base-100 border border-base-300">
+        <div class="card-body">
+          <div class="mt-4">
+            <EntityTable
+              :entity-model="statutRendezVouEntity"
+              :entity-search-fields="statutRendezVouSearchFields"
+              :default-active-filters="['idstatutStatut']"
+              :searchFn="getStatutRendezVousData"
+              :getPaginationData="statutRendezVouGetPaginationData"
+              :listComponent="StatutRendezVouList"
+              :entities="statutRendezVous"
+              :message="statutRendezVouMessage"
+              :show-filters="false"
+              :edit-action="false"
+              :remove-action="false"
+            />
+          </div>
+        </div>
+      </div>            
     </div>
+    
     
   </div>
 </template>
@@ -75,69 +65,30 @@ import StatutRendezVouList from '@/entities/statutRendezVou/StatutRendezVouList.
 
 const route = useRoute()
 const pathId = Number(route.params.id)
-
 const { getStatutById, goToListView } = useStatuts()
 const entity = ref<Statut | null>(null)
-
 
 const {
   statutRendezVous,
   getAllStatutRendezVousByStatutId,
   message: statutRendezVouMessage,
   getPaginationData: statutRendezVouGetPaginationData,
-  visibleListFields: statutRendezVouVisibleListFields,
-  loadColumnConfig: loadStatutRendezVouColumnConfig,
-  saveColumnConfig: saveStatutRendezVouColumnConfig,
 } = useStatutRendezVous()
-
 const getStatutRendezVousData = async (
   unpagined: boolean,
   filters: Record<string, unknown>,
   pagination: PaginationRequestParameter,
   sortFields: SortFieldParameter[],
 ) => {
-  return await getAllStatutRendezVousByStatutId(
-    pathId,
-    unpagined,
-    pagination,
-    sortFields
-  )
+  return await getAllStatutRendezVousByStatutId(pathId, unpagined, pagination, sortFields)
 }
-
-const statutRendezVouSearchFields = ref<EntitySearchField[]>(
-  StatutRendezVou.getAllSearchFieldsMetadata()
-)
-
-const statutRendezVouEntity = ref<Record<string, unknown>>({
-  idstatutStatut: pathId
-})
-
-const handleUpdateStatutRendezVouVisibleFields = async (
-  newFields: string[]
-) => {
-  const result = await saveStatutRendezVouColumnConfig(newFields)
-
-  if (!result.success) {
-    console.error(
-      'Échec de la sauvegarde de la configuration des colonnes StatutRendezVou:',
-      result.error
-    )
-  }
-}
-
-
+const statutRendezVouSearchFields = ref<EntitySearchField[]>(StatutRendezVou.getAllSearchFieldsMetadata())
+const statutRendezVouEntity = ref<Record<string, unknown>>({ idstatutStatut: pathId })
 
 onMounted(async () => {
   const result = await getStatutById(pathId)
   entity.value = result.data || null
-
-  
-  await Promise.all([
-    loadStatutRendezVouColumnConfig(),
-    
-  ])
-  
-})
+});
 
 </script>
 <style scoped></style>

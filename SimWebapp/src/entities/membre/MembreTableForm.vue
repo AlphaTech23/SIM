@@ -7,7 +7,6 @@
         <thead>
           <tr class="text-primary-focus">
             <th class="">#</th>
-            <th v-if="!isParentFK('Secteur')" class="">Idsecteur secteurs</th>
             <th class="">Intitule</th>
             <th class="">Logo</th>
             <th class="">Telephone</th>
@@ -23,7 +22,6 @@
               :internalId="index + 1"
               :membre="row.data"
               :violations="violations ? violations[index] : undefined"
-              :parent-class-name="parentClassName"
               @request:remove="removeRowHandler(row._internalId)"
               @udpate:model-value="(rowData) => (row.rowValue = rowData)"
             />
@@ -57,11 +55,7 @@ const props = defineProps<{
   getTableDataCallback: (data: MembreFormDTO[]) => void
   initialData?: Membre[]
   violations?: Record<string, string>[]
-  parentClassName?: string
 }>()
-
-// Masque la FK correspondant au parent courant (résolu à l'exécution via parentClassName)
-const isParentFK = (fkType: string) => !!props.parentClassName && fkType === props.parentClassName
 
 const { rows, addRow, removeRow, getTableData } = useTableForm<Membre, MembreFormDTO>(
   props.initialData,

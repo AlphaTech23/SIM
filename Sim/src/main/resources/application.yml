@@ -17,7 +17,11 @@ spring:
     serialization:
       write-dates-as-timestamps: false
 
-
+  flyway:
+    enabled: true
+    locations: classpath:sql-init
+    baseline-on-migrate: true
+    baseline-version: 0
 
 server:
   port: 8080
@@ -30,9 +34,9 @@ logging:
     root: TRACE
     org.hibernate.SQL: TRACE
 
-
-
-
+jwt:
+  secret: ${JWT_SECRET:Bel0Y8TSTrZyicQgAJdcabCbaMQo3s3BkBmP925Wb3g=}
+  expiration: 36000
 
 app:
   config:

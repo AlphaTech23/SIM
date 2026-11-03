@@ -51,7 +51,13 @@
 
     <!-- Bottom section -->
     <div class="border-t border-base-content/10 flex flex-col gap-3">
-      
+      <!-- User Profile -->
+      <div class="">
+        <UserNavProfile
+          :name="authStore.getCurrentUsername"
+          :dropdown-direction="{ top: true, center: true }"
+        />
+      </div>
     </div>
   </aside>
 </template>
@@ -62,6 +68,10 @@ import navigations from '@/config/navigations.ts'
 import HomeIcon from '@/components/icons/HomeIcon.vue'
 import GearIcon from '@/components/icons/GearIcon.vue'
 import AppLogo from '@/components/AppLogo.vue'
+import UserNavProfile from '@/components/user/UserNavProfile.vue'
+import { useAuthenticationStore } from '@/stores/useAuthenticationStore.ts'
+
+const authStore = useAuthenticationStore()
 </script>
 
 <style scoped>

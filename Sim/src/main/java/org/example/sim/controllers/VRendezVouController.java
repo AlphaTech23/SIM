@@ -42,6 +42,7 @@ public class VRendezVouController  {
 
 	@Operation(
 	    summary = "Retrieve all v rendez vou",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of v rendez vou items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -91,6 +92,7 @@ public class VRendezVouController  {
 	}
 	@Operation(
 	    summary = "Retrieve all v rendez vou",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of v rendez vou items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -141,6 +143,7 @@ public class VRendezVouController  {
 	}
 	@Operation(
 	    summary = "Get v rendez vou by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific v rendez vou item by its ID"
 	)
 	@ApiResponses({

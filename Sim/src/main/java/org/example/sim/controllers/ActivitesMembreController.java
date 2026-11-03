@@ -42,6 +42,7 @@ public class ActivitesMembreController  {
 
 	@Operation(
 	    summary = "Retrieve all activites membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of activites membre items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -91,6 +92,7 @@ public class ActivitesMembreController  {
 	}
 	@Operation(
 	    summary = "Retrieve all activites membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of activites membre items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -141,6 +143,7 @@ public class ActivitesMembreController  {
 	}
 	@Operation(
 	    summary = "Get activites membre by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific activites membre item by its ID"
 	)
 	@ApiResponses({
@@ -193,6 +196,7 @@ public class ActivitesMembreController  {
 
 	@Operation(
 	    summary = "Create new activites membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
  
 	    description = "Create a new activites membre item with the provided information"
 	)
@@ -233,6 +237,7 @@ public class ActivitesMembreController  {
  
 	@Operation(
 	    summary = "Update existing activites membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
 	    description = "Update an existing activites membre item with the provided information"
 	)
@@ -279,6 +284,7 @@ public class ActivitesMembreController  {
 
 	@Operation(
 	    summary = "Delete activites membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },    
 
 	    description = "Delete a activites membre item by its ID. Returns success even if activites membre was already deleted."
 	)

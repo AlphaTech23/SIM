@@ -29,7 +29,6 @@
           :initial-data="membresData"
           :get-table-data-callback="setMembres"
           :violations="membreViolations"
-          parentClassName="Secteur"
           class="w-full"
         />
         

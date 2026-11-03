@@ -42,6 +42,7 @@ public class VRendezVousEnAttenteController  {
 
 	@Operation(
 	    summary = "Retrieve all v rendez vous en attente",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of v rendez vous en attente items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -91,6 +92,7 @@ public class VRendezVousEnAttenteController  {
 	}
 	@Operation(
 	    summary = "Retrieve all v rendez vous en attente",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of v rendez vous en attente items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -141,6 +143,7 @@ public class VRendezVousEnAttenteController  {
 	}
 	@Operation(
 	    summary = "Get v rendez vous en attente by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific v rendez vous en attente item by its ID"
 	)
 	@ApiResponses({

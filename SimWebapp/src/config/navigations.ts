@@ -33,6 +33,48 @@ const navigations = [
       },
       
       {
+        navTitle:'entities.choixHoraireDemandeur.nav.title',
+        navChilds:[
+          {
+            navTitle: 'entities.choixHoraireDemandeur.nav.list',
+            navLink: '/choixHoraireDemandeurs',
+          },
+          {
+            navTitle: 'entities.choixHoraireDemandeur.nav.create',
+            navLink: '/choixHoraireDemandeurs/create',
+          },
+        ]
+      },
+      
+      {
+        navTitle:'entities.ciblesOffre.nav.title',
+        navChilds:[
+          {
+            navTitle: 'entities.ciblesOffre.nav.list',
+            navLink: '/ciblesOffres',
+          },
+          {
+            navTitle: 'entities.ciblesOffre.nav.create',
+            navLink: '/ciblesOffres/create',
+          },
+        ]
+      },
+      
+      {
+        navTitle:'entities.histoOffre.nav.title',
+        navChilds:[
+          {
+            navTitle: 'entities.histoOffre.nav.list',
+            navLink: '/histoOffres',
+          },
+          {
+            navTitle: 'entities.histoOffre.nav.create',
+            navLink: '/histoOffres/create',
+          },
+        ]
+      },
+      
+      {
         navTitle:'entities.membre.nav.title',
         navChilds:[
           {
@@ -47,15 +89,15 @@ const navigations = [
       },
       
       {
-        navTitle:'entities.plageHoraire.nav.title',
+        navTitle:'entities.offre.nav.title',
         navChilds:[
           {
-            navTitle: 'entities.plageHoraire.nav.list',
-            navLink: '/plageHoraires',
+            navTitle: 'entities.offre.nav.list',
+            navLink: '/offres',
           },
           {
-            navTitle: 'entities.plageHoraire.nav.create',
-            navLink: '/plageHoraires/create',
+            navTitle: 'entities.offre.nav.create',
+            navLink: '/offres/create',
           },
         ]
       },
@@ -103,6 +145,20 @@ const navigations = [
       },
       
       {
+        navTitle:'entities.statutOffre.nav.title',
+        navChilds:[
+          {
+            navTitle: 'entities.statutOffre.nav.list',
+            navLink: '/statutOffres',
+          },
+          {
+            navTitle: 'entities.statutOffre.nav.create',
+            navLink: '/statutOffres/create',
+          },
+        ]
+      },
+      
+      {
         navTitle:'entities.statutRendezVou.nav.title',
         navChilds:[
           {
@@ -144,6 +200,20 @@ const navigations = [
         ]
       },
       
+      {
+        navTitle:'entities.typeOffre.nav.title',
+        navChilds:[
+          {
+            navTitle: 'entities.typeOffre.nav.list',
+            navLink: '/typeOffres',
+          },
+          {
+            navTitle: 'entities.typeOffre.nav.create',
+            navLink: '/typeOffres/create',
+          },
+        ]
+      },
+      
       
     ],
   },
@@ -152,6 +222,31 @@ const navigations = [
     icon: 'fas fa-box',
     sectionName: 'navbar.views',
     navChilds: [
+      {
+        navTitle:'views.vRendezVou.nav.title',
+        navLink: '/vRendezVous',
+      },
+      
+      {
+        navTitle:'views.vRendezVousAccepte.nav.title',
+        navLink: '/vRendezVousAcceptes',
+      },
+      
+      {
+        navTitle:'views.vRendezVousAnnule.nav.title',
+        navLink: '/vRendezVousAnnules',
+      },
+      
+      {
+        navTitle:'views.vRendezVousEnAttente.nav.title',
+        navLink: '/vRendezVousEnAttentes',
+      },
+      
+      {
+        navTitle:'views.vRendezVousRefuse.nav.title',
+        navLink: '/vRendezVousRefuses',
+      },
+      
       
     ],
   },

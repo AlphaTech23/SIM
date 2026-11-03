@@ -99,7 +99,6 @@
           :initial-data="sujetsMembresData"
           :get-table-data-callback="setSujetsMembres"
           :violations="sujetsMembreViolations"
-          parentClassName="Sujet"
           class="w-full"
         />
         

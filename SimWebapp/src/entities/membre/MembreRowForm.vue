@@ -10,7 +10,6 @@ const props = defineProps<{
   internalId: number
   membre: Membre
   violations?: Record<string, string> | null
-  parentClassName?: string
 }>()
 
 const emit = defineEmits<{
@@ -20,15 +19,6 @@ const emit = defineEmits<{
 
 const formModel = ref<MembreFormDTO>(MembreFormDTO.parse(props.membre))
 
-
-// Masque la FK correspondant au parent courant (résolu à l'exécution via parentClassName)
-const isParentFK = (fkType: string) => !!props.parentClassName && fkType === props.parentClassName
-
-const idsecteurSecteursSearchField = Membre.getSearchFieldByKey('idsecteurSecteurs')
-// getKeyValue() = identifiant de la FK (attendu par le select), et non getReferenceValue() = libellé
-const idsecteurSecteursDefaultValue = props.membre
-  ? (props.membre?.idsecteurSecteurs?.getKeyValue?.() ?? undefined)
-  : undefined
 
 
 function removeRow() {
@@ -51,24 +41,6 @@ onMounted(() => {
     <td>
       {{ internalId }}
     </td>
-    <td v-if="!isParentFK('Secteur')">
-      <GenesisSelectSearchCriteria
-        v-if="idsecteurSecteursSearchField?.multicriteriaSelect"
-        :violation="violations ? violations['idsecteurSecteurs'] : undefined"
-        placeholder="Select Idsecteur secteurs"
-        key="MembreIdsecteurSecteurs"
-        :search-function="idsecteurSecteursSearchField?.multicriteriaSelect.searchFunction"
-        :filters="idsecteurSecteursSearchField?.multicriteriaSelect.filters"
-        :default-value="idsecteurSecteursDefaultValue"
-        @option-selected="
-          (selectedValue) => {
-            formModel.idsecteurSecteurs = String(selectedValue)
-            updateModel()
-          }
-        "
-      />
-    </td>
-    
     <td>
       <GenesisInput
         :violation="violations ? violations['intitule'] : undefined"

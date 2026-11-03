@@ -19,7 +19,6 @@
           :initial-data="statutRendezVousData"
           :get-table-data-callback="setStatutRendezVous"
           :violations="statutRendezVouViolations"
-          parentClassName="Statut"
           class="w-full"
         />
         

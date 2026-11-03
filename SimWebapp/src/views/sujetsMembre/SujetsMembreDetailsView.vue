@@ -18,11 +18,7 @@
       </GenesisButton>
     </div>
     <!-- Entity details -->
-    <SujetsMembreDetails
-      v-if="entity"
-      :sujetsMembre="entity"
-    />
-
+    <SujetsMembreDetails v-if="entity" :sujetsMembre="entity" />
     
   </div>
 </template>
@@ -38,18 +34,13 @@ import LeftArrowIcon from '@/components/icons/LeftArrowIcon.vue'
 
 const route = useRoute()
 const pathId = Number(route.params.id)
-
 const { getSujetsMembreById, goToListView } = useSujetsMembres()
 const entity = ref<SujetsMembre | null>(null)
-
-
 
 onMounted(async () => {
   const result = await getSujetsMembreById(pathId)
   entity.value = result.data || null
-
-  
-})
+});
 
 </script>
 <style scoped></style>

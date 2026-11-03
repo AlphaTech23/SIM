@@ -42,6 +42,7 @@ public class VRendezVousRefuseController  {
 
 	@Operation(
 	    summary = "Retrieve all v rendez vous refuse",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of v rendez vous refuse items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -91,6 +92,7 @@ public class VRendezVousRefuseController  {
 	}
 	@Operation(
 	    summary = "Retrieve all v rendez vous refuse",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of v rendez vous refuse items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -141,6 +143,7 @@ public class VRendezVousRefuseController  {
 	}
 	@Operation(
 	    summary = "Get v rendez vous refuse by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific v rendez vous refuse item by its ID"
 	)
 	@ApiResponses({

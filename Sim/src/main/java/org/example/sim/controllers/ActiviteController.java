@@ -53,6 +53,7 @@ private final ActivitesMembreService activitesmembreService;
 
 	@Operation(
 	    summary = "Retrieve all activite",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of activite items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -102,6 +103,7 @@ private final ActivitesMembreService activitesmembreService;
 	}
 	@Operation(
 	    summary = "Retrieve all activite",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of activite items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -152,6 +154,7 @@ private final ActivitesMembreService activitesmembreService;
 	}
 	@Operation(
 	    summary = "Get activite by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific activite item by its ID"
 	)
 	@ApiResponses({
@@ -204,6 +207,7 @@ private final ActivitesMembreService activitesmembreService;
 
 	@Operation(
 	    summary = "Create new activite",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
 	    description = "Create a new activite and its details. The operation is atomic: all or nothing."
 	)
@@ -272,6 +276,7 @@ private final ActivitesMembreService activitesmembreService;
  
 	@Operation(
 	    summary = "Update existing activite",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
           description = "Update an existing activite and its details. The operation is atomic: all or nothing."
       )
@@ -369,6 +374,7 @@ private final ActivitesMembreService activitesmembreService;
 
 	@Operation(
 	    summary = "Delete activite",
+	    security = { @SecurityRequirement(name = "bearerAuth") },    
 
           description = "Delete an existing activite and all its associated details. The operation is atomic: all or nothing."
       )
@@ -419,6 +425,7 @@ private final ActivitesMembreService activitesmembreService;
 
 @Operation(
   summary = "Get activitesMembres attached with a activite ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
   description = "Retrieve a list of activitesMembres from a activite item ID"
 )
 @ApiResponses({

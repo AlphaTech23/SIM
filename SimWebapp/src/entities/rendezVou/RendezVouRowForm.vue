@@ -10,7 +10,6 @@ const props = defineProps<{
   internalId: number
   rendezVou: RendezVou
   violations?: Record<string, string> | null
-  parentClassName?: string
 }>()
 
 const emit = defineEmits<{
@@ -20,20 +19,10 @@ const emit = defineEmits<{
 
 const formModel = ref<RendezVouFormDTO>(RendezVouFormDTO.parse(props.rendezVou))
 
-
-// Masque la FK correspondant au parent courant (résolu à l'exécution via parentClassName)
-const isParentFK = (fkType: string) => !!props.parentClassName && fkType === props.parentClassName
-
-const iddemandeurMembresSearchField = RendezVou.getSearchFieldByKey('iddemandeurMembres')
-// getKeyValue() = identifiant de la FK (attendu par le select), et non getReferenceValue() = libellé
-const iddemandeurMembresDefaultValue = props.rendezVou
-  ? (props.rendezVou?.iddemandeurMembres?.getKeyValue?.() ?? undefined)
-  : undefined
 const idreceveurSujetsMembresSearchField = RendezVou.getSearchFieldByKey('idreceveurSujetsMembres')
-// getKeyValue() = identifiant de la FK (attendu par le select), et non getReferenceValue() = libellé
 const idreceveurSujetsMembresDefaultValue = props.rendezVou
-  ? (props.rendezVou?.idreceveurSujetsMembres?.getKeyValue?.() ?? undefined)
-  : undefined
+? (props.rendezVou?.idreceveurSujetsMembres?.getReferenceValue?.() ?? undefined)
+: undefined      
 
 
 function removeRow() {
@@ -56,25 +45,7 @@ onMounted(() => {
     <td>
       {{ internalId }}
     </td>
-    <td v-if="!isParentFK('Membre')">
-      <GenesisSelectSearchCriteria
-        v-if="iddemandeurMembresSearchField?.multicriteriaSelect"
-        :violation="violations ? violations['iddemandeurMembres'] : undefined"
-        placeholder="Select Iddemandeur membres"
-        key="RendezVouIddemandeurMembres"
-        :search-function="iddemandeurMembresSearchField?.multicriteriaSelect.searchFunction"
-        :filters="iddemandeurMembresSearchField?.multicriteriaSelect.filters"
-        :default-value="iddemandeurMembresDefaultValue"
-        @option-selected="
-          (selectedValue) => {
-            formModel.iddemandeurMembres = String(selectedValue)
-            updateModel()
-          }
-        "
-      />
-    </td>
-    
-    <td v-if="!isParentFK('SujetsMembre')">
+    <td>
       <GenesisSelectSearchCriteria
         v-if="idreceveurSujetsMembresSearchField?.multicriteriaSelect"
         :violation="violations ? violations['idreceveurSujetsMembres'] : undefined"

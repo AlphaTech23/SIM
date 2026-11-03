@@ -53,6 +53,7 @@ private final MembreService membreService;
 
 	@Operation(
 	    summary = "Retrieve all secteur",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of secteur items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -102,6 +103,7 @@ private final MembreService membreService;
 	}
 	@Operation(
 	    summary = "Retrieve all secteur",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of secteur items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -152,6 +154,7 @@ private final MembreService membreService;
 	}
 	@Operation(
 	    summary = "Get secteur by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific secteur item by its ID"
 	)
 	@ApiResponses({
@@ -204,6 +207,7 @@ private final MembreService membreService;
 
 	@Operation(
 	    summary = "Create new secteur",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
 	    description = "Create a new secteur and its details. The operation is atomic: all or nothing."
 	)
@@ -272,6 +276,7 @@ private final MembreService membreService;
  
 	@Operation(
 	    summary = "Update existing secteur",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
           description = "Update an existing secteur and its details. The operation is atomic: all or nothing."
       )
@@ -369,6 +374,7 @@ private final MembreService membreService;
 
 	@Operation(
 	    summary = "Delete secteur",
+	    security = { @SecurityRequirement(name = "bearerAuth") },    
 
           description = "Delete an existing secteur and all its associated details. The operation is atomic: all or nothing."
       )
@@ -419,6 +425,7 @@ private final MembreService membreService;
 
 @Operation(
   summary = "Get membres attached with a secteur ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
   description = "Retrieve a list of membres from a secteur item ID"
 )
 @ApiResponses({

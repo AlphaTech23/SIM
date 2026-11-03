@@ -81,21 +81,30 @@
           :initial-data="activitesMembresData"
           :get-table-data-callback="setActivitesMembres"
           :violations="activitesMembreViolations"
-          parentClassName="Membre"
+          class="w-full"
+        />
+        <CiblesOffreTableForm
+          :initial-data="ciblesOffresData"
+          :get-table-data-callback="setCiblesOffres"
+          :violations="ciblesOffreViolations"
+          class="w-full"
+        />
+        <OffreTableForm
+          :initial-data="offresData"
+          :get-table-data-callback="setOffres"
+          :violations="offreViolations"
           class="w-full"
         />
         <RendezVouTableForm
           :initial-data="rendezVousData"
           :get-table-data-callback="setRendezVous"
           :violations="rendezVouViolations"
-          parentClassName="Membre"
           class="w-full"
         />
         <SujetsMembreTableForm
           :initial-data="sujetsMembresData"
           :get-table-data-callback="setSujetsMembres"
           :violations="sujetsMembreViolations"
-          parentClassName="Membre"
           class="w-full"
         />
         
@@ -118,6 +127,10 @@ import GenesisInput from '@/components/form/GenesisInput.vue'
 import GenesisSelectSearchCriteria from '@/components/form/GenesisSelectSearchCriteria.vue'
 import{ ActivitesMembreFormDTO, type ActivitesMembre } from '@/models/ActivitesMembreModel.ts'
 import ActivitesMembreTableForm from '@/entities/activitesMembre/ActivitesMembreTableForm.vue'
+import{ CiblesOffreFormDTO, type CiblesOffre } from '@/models/CiblesOffreModel.ts'
+import CiblesOffreTableForm from '@/entities/ciblesOffre/CiblesOffreTableForm.vue'
+import{ OffreFormDTO, type Offre } from '@/models/OffreModel.ts'
+import OffreTableForm from '@/entities/offre/OffreTableForm.vue'
 import{ RendezVouFormDTO, type RendezVou } from '@/models/RendezVouModel.ts'
 import RendezVouTableForm from '@/entities/rendezVou/RendezVouTableForm.vue'
 import{ SujetsMembreFormDTO, type SujetsMembre } from '@/models/SujetsMembreModel.ts'
@@ -129,12 +142,16 @@ const props = defineProps<{
   membre?: Membre
   
   activitesMembresData?: ActivitesMembre[]
+  ciblesOffresData?: CiblesOffre[]
+  offresData?: Offre[]
   rendezVousData?: RendezVou[]
   sujetsMembresData?: SujetsMembre[]
   
   violations?:{
     membre: Record<string, string>
     activitesMembres: Record<string, string>[]
+    ciblesOffres: Record<string, string>[]
+    offres: Record<string, string>[]
     rendezVous: Record<string, string>[]
     sujetsMembres: Record<string, string>[]
     
@@ -144,12 +161,14 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'submit', payload: { membre: Partial<MembreFormDTO>; activitesMembres: ActivitesMembreFormDTO[]; rendezVous: RendezVouFormDTO[]; sujetsMembres: SujetsMembreFormDTO[] }): void
+  (e: 'submit', payload: { membre: Partial<MembreFormDTO>; activitesMembres: ActivitesMembreFormDTO[]; ciblesOffres: CiblesOffreFormDTO[]; offres: OffreFormDTO[]; rendezVous: RendezVouFormDTO[]; sujetsMembres: SujetsMembreFormDTO[] }): void
   (e: 'cancel', payload: Partial<MembreFormDTO>): void
 }>()
 
 const membreViolations = computed(() => props.violations ? props.violations.membre : {})
 const activitesMembreViolations = computed(() => props.violations ? props.violations.activitesMembres : [])
+const ciblesOffreViolations = computed(() => props.violations ? props.violations.ciblesOffres : [])
+const offreViolations = computed(() => props.violations ? props.violations.offres : [])
 const rendezVouViolations = computed(() => props.violations ? props.violations.rendezVous : [])
 const sujetsMembreViolations = computed(() => props.violations ? props.violations.sujetsMembres : [])
 
@@ -166,6 +185,14 @@ const idsecteurSecteursDefaultValue = props.membre
 const activitesMembres =ref<ActivitesMembreFormDTO[]>([])
 const setActivitesMembres = (data: ActivitesMembreFormDTO[]) => {
   activitesMembres.value = data
+}
+const ciblesOffres =ref<CiblesOffreFormDTO[]>([])
+const setCiblesOffres = (data: CiblesOffreFormDTO[]) => {
+  ciblesOffres.value = data
+}
+const offres =ref<OffreFormDTO[]>([])
+const setOffres = (data: OffreFormDTO[]) => {
+  offres.value = data
 }
 const rendezVous =ref<RendezVouFormDTO[]>([])
 const setRendezVous = (data: RendezVouFormDTO[]) => {
@@ -189,7 +216,7 @@ async function handleSubmit() {
     }
   });
   
-  emit('submit', { membre: data, activitesMembres: activitesMembres.value, rendezVous: rendezVous.value, sujetsMembres: sujetsMembres.value })
+  emit('submit', { membre: data, activitesMembres: activitesMembres.value, ciblesOffres: ciblesOffres.value, offres: offres.value, rendezVous: rendezVous.value, sujetsMembres: sujetsMembres.value })
   
 }
 
@@ -199,6 +226,10 @@ function cancelForm() {
 onMounted(async () => {
   if (Array.isArray(props.activitesMembresData) && props.activitesMembresData.length > 0) {
     setActivitesMembres(ActivitesMembreFormDTO.parseList(props.activitesMembresData))
+  }if (Array.isArray(props.ciblesOffresData) && props.ciblesOffresData.length > 0) {
+    setCiblesOffres(CiblesOffreFormDTO.parseList(props.ciblesOffresData))
+  }if (Array.isArray(props.offresData) && props.offresData.length > 0) {
+    setOffres(OffreFormDTO.parseList(props.offresData))
   }if (Array.isArray(props.rendezVousData) && props.rendezVousData.length > 0) {
     setRendezVous(RendezVouFormDTO.parseList(props.rendezVousData))
   }if (Array.isArray(props.sujetsMembresData) && props.sujetsMembresData.length > 0) {

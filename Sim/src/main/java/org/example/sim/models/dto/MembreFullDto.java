@@ -3,6 +3,8 @@ package org.example.sim.models.dto;
 import org.example.sim.models.Membre;
 
 import org.example.sim.models.ActivitesMembre;
+import org.example.sim.models.CiblesOffre;
+import org.example.sim.models.Offre;
 import org.example.sim.models.RendezVou;
 import org.example.sim.models.SujetsMembre;
 
@@ -16,6 +18,8 @@ public class MembreFullDto {
     private Membre membre;
     
     private List<ActivitesMembre> activitesMembres;
+    private List<CiblesOffre> ciblesOffres;
+    private List<Offre> offres;
     private List<RendezVou> rendezVous;
     private List<SujetsMembre> sujetsMembres;
     

@@ -20,6 +20,10 @@ import jakarta.transaction.Transactional;
 import java.util.stream.Collectors;
 import org.example.sim.repositories.ActivitesMembreRepository;
 import org.example.sim.models.ActivitesMembre;
+import org.example.sim.repositories.CiblesOffreRepository;
+import org.example.sim.models.CiblesOffre;
+import org.example.sim.repositories.OffreRepository;
+import org.example.sim.models.Offre;
 import org.example.sim.repositories.RendezVouRepository;
 import org.example.sim.models.RendezVou;
 import org.example.sim.repositories.SujetsMembreRepository;
@@ -30,13 +34,17 @@ import org.example.sim.models.SujetsMembre;
 public class DefaultMembreService implements MembreService {
 	private final MembreRepository membreRepository;
 private final ActivitesMembreRepository activitesMembreRepository;
+private final CiblesOffreRepository ciblesOffreRepository;
+private final OffreRepository offreRepository;
 private final RendezVouRepository rendezVouRepository;
 private final SujetsMembreRepository sujetsMembreRepository;
 
 
-	public DefaultMembreService(MembreRepository membreRepository, ActivitesMembreRepository activitesMembreRepository, RendezVouRepository rendezVouRepository, SujetsMembreRepository sujetsMembreRepository) {
+	public DefaultMembreService(MembreRepository membreRepository, ActivitesMembreRepository activitesMembreRepository, CiblesOffreRepository ciblesOffreRepository, OffreRepository offreRepository, RendezVouRepository rendezVouRepository, SujetsMembreRepository sujetsMembreRepository) {
 	   this.membreRepository = membreRepository;
 this.activitesMembreRepository = activitesMembreRepository;
+this.ciblesOffreRepository = ciblesOffreRepository;
+this.offreRepository = offreRepository;
 this.rendezVouRepository = rendezVouRepository;
 this.sujetsMembreRepository = sujetsMembreRepository;
 
@@ -116,7 +124,7 @@ this.sujetsMembreRepository = sujetsMembreRepository;
 
 @Override
 @Transactional
-public Membre createFullMembre(Membre membre, List<ActivitesMembre> activitesMembres, List<RendezVou> rendezVous, List<SujetsMembre> sujetsMembres) {
+public Membre createFullMembre(Membre membre, List<ActivitesMembre> activitesMembres, List<CiblesOffre> ciblesOffres, List<Offre> offres, List<RendezVou> rendezVous, List<SujetsMembre> sujetsMembres) {
   try {
     membre = membreRepository.save(membre);
     
@@ -126,6 +134,18 @@ public Membre createFullMembre(Membre membre, List<ActivitesMembre> activitesMem
     }
     
     activitesMembreRepository.saveAll(activitesMembres);
+    for (CiblesOffre ciblesOffre : ciblesOffres) {
+      ciblesOffre.setIdmembreMembres(membre);
+      ciblesOffre.setId(null);
+    }
+    
+    ciblesOffreRepository.saveAll(ciblesOffres);
+    for (Offre offre : offres) {
+      offre.setIdmembreMembres(membre);
+      offre.setId(null);
+    }
+    
+    offreRepository.saveAll(offres);
     for (RendezVou rendezVou : rendezVous) {
       rendezVou.setIddemandeurMembres(membre);
       rendezVou.setId(null);
@@ -149,7 +169,7 @@ public Membre createFullMembre(Membre membre, List<ActivitesMembre> activitesMem
   
 @Override
 @Transactional
-public Membre updateFullMembre(Integer id, Membre membre, List<ActivitesMembre> activitesMembres, List<RendezVou> rendezVous, List<SujetsMembre> sujetsMembres) {
+public Membre updateFullMembre(Integer id, Membre membre, List<ActivitesMembre> activitesMembres, List<CiblesOffre> ciblesOffres, List<Offre> offres, List<RendezVou> rendezVous, List<SujetsMembre> sujetsMembres) {
   try {
     if (!membreRepository.existsById(id)) {
       throw new ResourceNotFoundException("Membre not found with id: " + id);
@@ -178,6 +198,50 @@ public Membre updateFullMembre(Integer id, Membre membre, List<ActivitesMembre> 
       } else {
           activitesMembre.setId(null);
           activitesMembreRepository.save(activitesMembre);
+      }
+    }
+    List<CiblesOffre> existingCiblesOffres = ciblesOffreRepository.findByIdmembreMembres(membre);
+
+    List<CiblesOffre> ciblesOffresToDelete = existingCiblesOffres.stream()
+      .filter(existing -> ciblesOffres.stream()
+      .noneMatch(current -> current.getId() != null && current.getId().equals(existing.getId())))
+      .collect(Collectors.toList());
+    if (!ciblesOffresToDelete.isEmpty()) {
+      ciblesOffreRepository.deleteAll(ciblesOffresToDelete);
+    }
+
+    for (CiblesOffre ciblesOffre : ciblesOffres) {
+      ciblesOffre.setIdmembreMembres(membre);
+      
+      if (ciblesOffre.getId() != null && 
+          existingCiblesOffres.stream()
+            .anyMatch(e -> e.getId().equals(ciblesOffre.getId()))) {
+          ciblesOffreRepository.save(ciblesOffre);
+      } else {
+          ciblesOffre.setId(null);
+          ciblesOffreRepository.save(ciblesOffre);
+      }
+    }
+    List<Offre> existingOffres = offreRepository.findByIdmembreMembres(membre);
+
+    List<Offre> offresToDelete = existingOffres.stream()
+      .filter(existing -> offres.stream()
+      .noneMatch(current -> current.getId() != null && current.getId().equals(existing.getId())))
+      .collect(Collectors.toList());
+    if (!offresToDelete.isEmpty()) {
+      offreRepository.deleteAll(offresToDelete);
+    }
+
+    for (Offre offre : offres) {
+      offre.setIdmembreMembres(membre);
+      
+      if (offre.getId() != null && 
+          existingOffres.stream()
+            .anyMatch(e -> e.getId().equals(offre.getId()))) {
+          offreRepository.save(offre);
+      } else {
+          offre.setId(null);
+          offreRepository.save(offre);
       }
     }
     List<RendezVou> existingRendezVous = rendezVouRepository.findByIddemandeurMembres(membre);
@@ -246,6 +310,16 @@ public Membre updateFullMembre(Integer id, Membre membre, List<ActivitesMembre> 
         
         if (!activitesMembresToDelete.isEmpty()) {
             activitesMembreRepository.deleteAll(activitesMembresToDelete);
+        }
+        List<CiblesOffre> ciblesOffresToDelete = ciblesOffreRepository.findByIdmembreMembres(membre);
+        
+        if (!ciblesOffresToDelete.isEmpty()) {
+            ciblesOffreRepository.deleteAll(ciblesOffresToDelete);
+        }
+        List<Offre> offresToDelete = offreRepository.findByIdmembreMembres(membre);
+        
+        if (!offresToDelete.isEmpty()) {
+            offreRepository.deleteAll(offresToDelete);
         }
         List<RendezVou> rendezVousToDelete = rendezVouRepository.findByIddemandeurMembres(membre);
         

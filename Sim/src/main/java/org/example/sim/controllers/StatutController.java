@@ -53,6 +53,7 @@ private final StatutRendezVouService statutrendezvouService;
 
 	@Operation(
 	    summary = "Retrieve all statut",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of statut items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -102,6 +103,7 @@ private final StatutRendezVouService statutrendezvouService;
 	}
 	@Operation(
 	    summary = "Retrieve all statut",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of statut items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -152,6 +154,7 @@ private final StatutRendezVouService statutrendezvouService;
 	}
 	@Operation(
 	    summary = "Get statut by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific statut item by its ID"
 	)
 	@ApiResponses({
@@ -204,6 +207,7 @@ private final StatutRendezVouService statutrendezvouService;
 
 	@Operation(
 	    summary = "Create new statut",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
 	    description = "Create a new statut and its details. The operation is atomic: all or nothing."
 	)
@@ -272,6 +276,7 @@ private final StatutRendezVouService statutrendezvouService;
  
 	@Operation(
 	    summary = "Update existing statut",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
           description = "Update an existing statut and its details. The operation is atomic: all or nothing."
       )
@@ -369,6 +374,7 @@ private final StatutRendezVouService statutrendezvouService;
 
 	@Operation(
 	    summary = "Delete statut",
+	    security = { @SecurityRequirement(name = "bearerAuth") },    
 
           description = "Delete an existing statut and all its associated details. The operation is atomic: all or nothing."
       )
@@ -419,6 +425,7 @@ private final StatutRendezVouService statutrendezvouService;
 
 @Operation(
   summary = "Get statutRendezVous attached with a statut ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
   description = "Retrieve a list of statutRendezVous from a statut item ID"
 )
 @ApiResponses({

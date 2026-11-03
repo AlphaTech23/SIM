@@ -10,6 +10,8 @@ import {
 import { Membre } from '@/models/MembreModel'
 import type { DataResponse, PagedDataResponse } from '@/models/api/DataResponseModel'
 import type { ActivitesMembre } from '@/models/ActivitesMembreModel'
+import type { CiblesOffre } from '@/models/CiblesOffreModel'
+import type { Offre } from '@/models/OffreModel'
 import type { RendezVou } from '@/models/RendezVouModel'
 import type { SujetsMembre } from '@/models/SujetsMembreModel'
 
@@ -58,7 +60,7 @@ export async function getById(id: number | string | undefined) {
 
 
 /** POST create */
-export async function create(data: { membre: Partial<Membre>; activitesMembres: Partial<ActivitesMembre>[]; rendezVous: Partial<RendezVou>[]; sujetsMembres: Partial<SujetsMembre>[] }){
+export async function create(data: { membre: Partial<Membre>; activitesMembres: Partial<ActivitesMembre>[]; ciblesOffres: Partial<CiblesOffre>[]; offres: Partial<Offre>[]; rendezVous: Partial<RendezVou>[]; sujetsMembres: Partial<SujetsMembre>[] }){
   const response = await restApi.POST(BASE_URL, data)
   return wrapMembre(RestResponse.handleDataResponse<Membre>(response)) as DataResponse<Membre>
 }
@@ -70,6 +72,8 @@ export async function update(
   data: {
     membre: Partial<Membre>
     activitesMembres: Partial<ActivitesMembre>[]
+    ciblesOffres: Partial<CiblesOffre>[]
+    offres: Partial<Offre>[]
     rendezVous: Partial<RendezVou>[]
     sujetsMembres: Partial<SujetsMembre>[]
      

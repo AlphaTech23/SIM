@@ -18,41 +18,31 @@
       </GenesisButton>
     </div>
     <!-- Entity details -->
-    <ActiviteDetails
-      v-if="entity"
-      :activite="entity"
-    />
-
+    <ActiviteDetails v-if="entity" :activite="entity" />
     
-    <!-- Child tables tabs -->
-    <div class="tabs tabs-border mt-6 w-full">
-      <input
-        type="radio"
-        name="activite_details_tab"
-        class="tab"
-        :aria-label="$t('entities.activitesMembre.nav.title')"
-        checked
-      />
-
-      <div class="tab-content border-base-300 bg-base-100 p-4">
-        <EntityTable
-          :entity-model="activitesMembreEntity"
-          :entity-search-fields="activitesMembreSearchFields"
-          :default-active-filters="['idactiviteActivites']"
-          :searchFn="getActivitesMembresData"
-          :getPaginationData="activitesMembreGetPaginationData"
-          :listComponent="ActivitesMembreList"
-          :entities="activitesMembres"
-          :message="activitesMembreMessage"
-          :visible-fields="activitesMembreVisibleListFields"
-          :show-filters="false"
-          :edit-action="false"
-          :remove-action="false"
-          @update:visible-fields="handleUpdateActivitesMembreVisibleFields"
-        />
-      </div>
-      
+    <div class="tabs tabs-border">
+      <input type="radio" name="details_tab" class="tab" :aria-label="$t('entities.activitesMembre.nav.title')" checked />
+      <div class="tab-content card bg-base-100 border border-base-300">
+        <div class="card-body">
+          <div class="mt-4">
+            <EntityTable
+              :entity-model="activitesMembreEntity"
+              :entity-search-fields="activitesMembreSearchFields"
+              :default-active-filters="['idactiviteActivites']"
+              :searchFn="getActivitesMembresData"
+              :getPaginationData="activitesMembreGetPaginationData"
+              :listComponent="ActivitesMembreList"
+              :entities="activitesMembres"
+              :message="activitesMembreMessage"
+              :show-filters="false"
+              :edit-action="false"
+              :remove-action="false"
+            />
+          </div>
+        </div>
+      </div>            
     </div>
+    
     
   </div>
 </template>
@@ -75,69 +65,30 @@ import ActivitesMembreList from '@/entities/activitesMembre/ActivitesMembreList.
 
 const route = useRoute()
 const pathId = Number(route.params.id)
-
 const { getActiviteById, goToListView } = useActivites()
 const entity = ref<Activite | null>(null)
-
 
 const {
   activitesMembres,
   getAllActivitesMembresByActiviteId,
   message: activitesMembreMessage,
   getPaginationData: activitesMembreGetPaginationData,
-  visibleListFields: activitesMembreVisibleListFields,
-  loadColumnConfig: loadActivitesMembreColumnConfig,
-  saveColumnConfig: saveActivitesMembreColumnConfig,
 } = useActivitesMembres()
-
 const getActivitesMembresData = async (
   unpagined: boolean,
   filters: Record<string, unknown>,
   pagination: PaginationRequestParameter,
   sortFields: SortFieldParameter[],
 ) => {
-  return await getAllActivitesMembresByActiviteId(
-    pathId,
-    unpagined,
-    pagination,
-    sortFields
-  )
+  return await getAllActivitesMembresByActiviteId(pathId, unpagined, pagination, sortFields)
 }
-
-const activitesMembreSearchFields = ref<EntitySearchField[]>(
-  ActivitesMembre.getAllSearchFieldsMetadata()
-)
-
-const activitesMembreEntity = ref<Record<string, unknown>>({
-  idactiviteActivites: pathId
-})
-
-const handleUpdateActivitesMembreVisibleFields = async (
-  newFields: string[]
-) => {
-  const result = await saveActivitesMembreColumnConfig(newFields)
-
-  if (!result.success) {
-    console.error(
-      'Échec de la sauvegarde de la configuration des colonnes ActivitesMembre:',
-      result.error
-    )
-  }
-}
-
-
+const activitesMembreSearchFields = ref<EntitySearchField[]>(ActivitesMembre.getAllSearchFieldsMetadata())
+const activitesMembreEntity = ref<Record<string, unknown>>({ idactiviteActivites: pathId })
 
 onMounted(async () => {
   const result = await getActiviteById(pathId)
   entity.value = result.data || null
-
-  
-  await Promise.all([
-    loadActivitesMembreColumnConfig(),
-    
-  ])
-  
-})
+});
 
 </script>
 <style scoped></style>

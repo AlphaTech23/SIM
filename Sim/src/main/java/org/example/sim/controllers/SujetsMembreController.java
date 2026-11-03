@@ -42,6 +42,7 @@ public class SujetsMembreController  {
 
 	@Operation(
 	    summary = "Retrieve all sujets membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of sujets membre items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -91,6 +92,7 @@ public class SujetsMembreController  {
 	}
 	@Operation(
 	    summary = "Retrieve all sujets membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of sujets membre items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -141,6 +143,7 @@ public class SujetsMembreController  {
 	}
 	@Operation(
 	    summary = "Get sujets membre by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific sujets membre item by its ID"
 	)
 	@ApiResponses({
@@ -193,6 +196,7 @@ public class SujetsMembreController  {
 
 	@Operation(
 	    summary = "Create new sujets membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
  
 	    description = "Create a new sujets membre item with the provided information"
 	)
@@ -233,6 +237,7 @@ public class SujetsMembreController  {
  
 	@Operation(
 	    summary = "Update existing sujets membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
 	    description = "Update an existing sujets membre item with the provided information"
 	)
@@ -279,6 +284,7 @@ public class SujetsMembreController  {
 
 	@Operation(
 	    summary = "Delete sujets membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },    
 
 	    description = "Delete a sujets membre item by its ID. Returns success even if sujets membre was already deleted."
 	)

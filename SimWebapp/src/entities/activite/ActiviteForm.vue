@@ -29,7 +29,6 @@
           :initial-data="activitesMembresData"
           :get-table-data-callback="setActivitesMembres"
           :violations="activitesMembreViolations"
-          parentClassName="Activite"
           class="w-full"
         />
         

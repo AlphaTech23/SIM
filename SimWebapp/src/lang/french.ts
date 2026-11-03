@@ -202,6 +202,30 @@ const french = {
           list: '@.capitalize:entities.activitesMembre.name @:common.list',
         },
       },
+      choixHoraireDemandeur: {
+        name: 'choixHoraireDemandeur | choixHoraireDemandeurs',
+        nav: {
+          title: '@.capitalize:entities.choixHoraireDemandeur.name',
+          create: 'Create @.capitalize:entities.choixHoraireDemandeur.name',
+          list: '@.capitalize:entities.choixHoraireDemandeur.name @:common.list',
+        },
+      },
+      ciblesOffre: {
+        name: 'ciblesOffre | ciblesOffres',
+        nav: {
+          title: '@.capitalize:entities.ciblesOffre.name',
+          create: 'Create @.capitalize:entities.ciblesOffre.name',
+          list: '@.capitalize:entities.ciblesOffre.name @:common.list',
+        },
+      },
+      histoOffre: {
+        name: 'histoOffre | histoOffres',
+        nav: {
+          title: '@.capitalize:entities.histoOffre.name',
+          create: 'Create @.capitalize:entities.histoOffre.name',
+          list: '@.capitalize:entities.histoOffre.name @:common.list',
+        },
+      },
       membre: {
         name: 'membre | membres',
         nav: {
@@ -210,12 +234,12 @@ const french = {
           list: '@.capitalize:entities.membre.name @:common.list',
         },
       },
-      plageHoraire: {
-        name: 'plageHoraire | plageHoraires',
+      offre: {
+        name: 'offre | offres',
         nav: {
-          title: '@.capitalize:entities.plageHoraire.name',
-          create: 'Create @.capitalize:entities.plageHoraire.name',
-          list: '@.capitalize:entities.plageHoraire.name @:common.list',
+          title: '@.capitalize:entities.offre.name',
+          create: 'Create @.capitalize:entities.offre.name',
+          list: '@.capitalize:entities.offre.name @:common.list',
         },
       },
       rendezVou: {
@@ -242,6 +266,14 @@ const french = {
           list: '@.capitalize:entities.statut.name @:common.list',
         },
       },
+      statutOffre: {
+        name: 'statutOffre | statutOffres',
+        nav: {
+          title: '@.capitalize:entities.statutOffre.name',
+          create: 'Create @.capitalize:entities.statutOffre.name',
+          list: '@.capitalize:entities.statutOffre.name @:common.list',
+        },
+      },
       statutRendezVou: {
         name: 'statutRendezVou | statutRendezVous',
         nav: {
@@ -266,9 +298,52 @@ const french = {
           list: '@.capitalize:entities.sujetsMembre.name @:common.list',
         },
       },
+      typeOffre: {
+        name: 'typeOffre | typeOffres',
+        nav: {
+          title: '@.capitalize:entities.typeOffre.name',
+          create: 'Create @.capitalize:entities.typeOffre.name',
+          list: '@.capitalize:entities.typeOffre.name @:common.list',
+        },
+      },
       
     },
     views: {
+      vRendezVou: {
+        name: 'vRendezVou | vRendezVous',
+        nav: {
+          title: '@.capitalize:views.vRendezVou.name',
+          list: '@.capitalize:views.vRendezVou.name @:common.list',                  
+        },
+      },
+      vRendezVousAccepte: {
+        name: 'vRendezVousAccepte | vRendezVousAcceptes',
+        nav: {
+          title: '@.capitalize:views.vRendezVousAccepte.name',
+          list: '@.capitalize:views.vRendezVousAccepte.name @:common.list',                  
+        },
+      },
+      vRendezVousAnnule: {
+        name: 'vRendezVousAnnule | vRendezVousAnnules',
+        nav: {
+          title: '@.capitalize:views.vRendezVousAnnule.name',
+          list: '@.capitalize:views.vRendezVousAnnule.name @:common.list',                  
+        },
+      },
+      vRendezVousEnAttente: {
+        name: 'vRendezVousEnAttente | vRendezVousEnAttentes',
+        nav: {
+          title: '@.capitalize:views.vRendezVousEnAttente.name',
+          list: '@.capitalize:views.vRendezVousEnAttente.name @:common.list',                  
+        },
+      },
+      vRendezVousRefuse: {
+        name: 'vRendezVousRefuse | vRendezVousRefuses',
+        nav: {
+          title: '@.capitalize:views.vRendezVousRefuse.name',
+          list: '@.capitalize:views.vRendezVousRefuse.name @:common.list',                  
+        },
+      },
       
     },
 

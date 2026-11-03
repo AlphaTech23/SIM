@@ -18,41 +18,31 @@
       </GenesisButton>
     </div>
     <!-- Entity details -->
-    <SujetDetails
-      v-if="entity"
-      :sujet="entity"
-    />
-
+    <SujetDetails v-if="entity" :sujet="entity" />
     
-    <!-- Child tables tabs -->
-    <div class="tabs tabs-border mt-6 w-full">
-      <input
-        type="radio"
-        name="sujet_details_tab"
-        class="tab"
-        :aria-label="$t('entities.sujetsMembre.nav.title')"
-        checked
-      />
-
-      <div class="tab-content border-base-300 bg-base-100 p-4">
-        <EntityTable
-          :entity-model="sujetsMembreEntity"
-          :entity-search-fields="sujetsMembreSearchFields"
-          :default-active-filters="['idsujetSujets']"
-          :searchFn="getSujetsMembresData"
-          :getPaginationData="sujetsMembreGetPaginationData"
-          :listComponent="SujetsMembreList"
-          :entities="sujetsMembres"
-          :message="sujetsMembreMessage"
-          :visible-fields="sujetsMembreVisibleListFields"
-          :show-filters="false"
-          :edit-action="false"
-          :remove-action="false"
-          @update:visible-fields="handleUpdateSujetsMembreVisibleFields"
-        />
-      </div>
-      
+    <div class="tabs tabs-border">
+      <input type="radio" name="details_tab" class="tab" :aria-label="$t('entities.sujetsMembre.nav.title')" checked />
+      <div class="tab-content card bg-base-100 border border-base-300">
+        <div class="card-body">
+          <div class="mt-4">
+            <EntityTable
+              :entity-model="sujetsMembreEntity"
+              :entity-search-fields="sujetsMembreSearchFields"
+              :default-active-filters="['idsujetSujets']"
+              :searchFn="getSujetsMembresData"
+              :getPaginationData="sujetsMembreGetPaginationData"
+              :listComponent="SujetsMembreList"
+              :entities="sujetsMembres"
+              :message="sujetsMembreMessage"
+              :show-filters="false"
+              :edit-action="false"
+              :remove-action="false"
+            />
+          </div>
+        </div>
+      </div>            
     </div>
+    
     
   </div>
 </template>
@@ -75,69 +65,30 @@ import SujetsMembreList from '@/entities/sujetsMembre/SujetsMembreList.vue'
 
 const route = useRoute()
 const pathId = Number(route.params.id)
-
 const { getSujetById, goToListView } = useSujets()
 const entity = ref<Sujet | null>(null)
-
 
 const {
   sujetsMembres,
   getAllSujetsMembresBySujetId,
   message: sujetsMembreMessage,
   getPaginationData: sujetsMembreGetPaginationData,
-  visibleListFields: sujetsMembreVisibleListFields,
-  loadColumnConfig: loadSujetsMembreColumnConfig,
-  saveColumnConfig: saveSujetsMembreColumnConfig,
 } = useSujetsMembres()
-
 const getSujetsMembresData = async (
   unpagined: boolean,
   filters: Record<string, unknown>,
   pagination: PaginationRequestParameter,
   sortFields: SortFieldParameter[],
 ) => {
-  return await getAllSujetsMembresBySujetId(
-    pathId,
-    unpagined,
-    pagination,
-    sortFields
-  )
+  return await getAllSujetsMembresBySujetId(pathId, unpagined, pagination, sortFields)
 }
-
-const sujetsMembreSearchFields = ref<EntitySearchField[]>(
-  SujetsMembre.getAllSearchFieldsMetadata()
-)
-
-const sujetsMembreEntity = ref<Record<string, unknown>>({
-  idsujetSujets: pathId
-})
-
-const handleUpdateSujetsMembreVisibleFields = async (
-  newFields: string[]
-) => {
-  const result = await saveSujetsMembreColumnConfig(newFields)
-
-  if (!result.success) {
-    console.error(
-      'Échec de la sauvegarde de la configuration des colonnes SujetsMembre:',
-      result.error
-    )
-  }
-}
-
-
+const sujetsMembreSearchFields = ref<EntitySearchField[]>(SujetsMembre.getAllSearchFieldsMetadata())
+const sujetsMembreEntity = ref<Record<string, unknown>>({ idsujetSujets: pathId })
 
 onMounted(async () => {
   const result = await getSujetById(pathId)
   entity.value = result.data || null
-
-  
-  await Promise.all([
-    loadSujetsMembreColumnConfig(),
-    
-  ])
-  
-})
+});
 
 </script>
 <style scoped></style>

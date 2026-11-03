@@ -18,6 +18,8 @@
     <membre-form
       :submit-label="$t('entity.create.submitLabel', { entity: 'Membre' })"
       :activitesMembresData="initialActivitesMembres"
+      :ciblesOffresData="initialCiblesOffres"
+      :offresData="initialOffres"
       :rendezVousData="initialRendezVous"
       :sujetsMembresData="initialSujetsMembres"
       
@@ -46,6 +48,8 @@ import { usePopup } from '@/composables/usePopup'
 import { useFreezeScreenStore } from '@/stores/useFreezeScreenStore'
 import { ref } from 'vue'
 import type { ActivitesMembre, ActivitesMembreFormDTO } from '@/models/ActivitesMembreModel'
+import type { CiblesOffre, CiblesOffreFormDTO } from '@/models/CiblesOffreModel'
+import type { Offre, OffreFormDTO } from '@/models/OffreModel'
 import type { RendezVou, RendezVouFormDTO } from '@/models/RendezVouModel'
 import type { SujetsMembre, SujetsMembreFormDTO } from '@/models/SujetsMembreModel'
 
@@ -57,6 +61,8 @@ const violations = ref<
   | {
     membre: Record<string, string>
     activitesMembres: Record<string, string>[]
+    ciblesOffres: Record<string, string>[]
+    offres: Record<string, string>[]
     rendezVous: Record<string, string>[]
     sujetsMembres: Record<string, string>[]
     
@@ -64,6 +70,8 @@ const violations = ref<
   | undefined
 >(undefined)
 const initialActivitesMembres = ref<ActivitesMembre[]>([])
+const initialCiblesOffres = ref<CiblesOffre[]>([])
+const initialOffres = ref<Offre[]>([])
 const initialRendezVous = ref<RendezVou[]>([])
 const initialSujetsMembres = ref<SujetsMembre[]>([])
 
@@ -71,6 +79,8 @@ const initialSujetsMembres = ref<SujetsMembre[]>([])
 const createHandler = async (payload: {
   membre: Partial<MembreFormDTO>
   activitesMembres: ActivitesMembreFormDTO[]
+  ciblesOffres: CiblesOffreFormDTO[]
+  offres: OffreFormDTO[]
   rendezVous: RendezVouFormDTO[]
   sujetsMembres: SujetsMembreFormDTO[]
   
@@ -84,6 +94,8 @@ const createHandler = async (payload: {
       violations.value = errors as {
         membre: Record<string, string>
         activitesMembres: Record<string, string>[]
+        ciblesOffres: Record<string, string>[]
+        offres: Record<string, string>[]
         rendezVous: Record<string, string>[]
         sujetsMembres: Record<string, string>[]
         

@@ -18,41 +18,31 @@
       </GenesisButton>
     </div>
     <!-- Entity details -->
-    <SecteurDetails
-      v-if="entity"
-      :secteur="entity"
-    />
-
+    <SecteurDetails v-if="entity" :secteur="entity" />
     
-    <!-- Child tables tabs -->
-    <div class="tabs tabs-border mt-6 w-full">
-      <input
-        type="radio"
-        name="secteur_details_tab"
-        class="tab"
-        :aria-label="$t('entities.membre.nav.title')"
-        checked
-      />
-
-      <div class="tab-content border-base-300 bg-base-100 p-4">
-        <EntityTable
-          :entity-model="membreEntity"
-          :entity-search-fields="membreSearchFields"
-          :default-active-filters="['idsecteurSecteurs']"
-          :searchFn="getMembresData"
-          :getPaginationData="membreGetPaginationData"
-          :listComponent="MembreList"
-          :entities="membres"
-          :message="membreMessage"
-          :visible-fields="membreVisibleListFields"
-          :show-filters="false"
-          :edit-action="false"
-          :remove-action="false"
-          @update:visible-fields="handleUpdateMembreVisibleFields"
-        />
-      </div>
-      
+    <div class="tabs tabs-border">
+      <input type="radio" name="details_tab" class="tab" :aria-label="$t('entities.membre.nav.title')" checked />
+      <div class="tab-content card bg-base-100 border border-base-300">
+        <div class="card-body">
+          <div class="mt-4">
+            <EntityTable
+              :entity-model="membreEntity"
+              :entity-search-fields="membreSearchFields"
+              :default-active-filters="['idsecteurSecteurs']"
+              :searchFn="getMembresData"
+              :getPaginationData="membreGetPaginationData"
+              :listComponent="MembreList"
+              :entities="membres"
+              :message="membreMessage"
+              :show-filters="false"
+              :edit-action="false"
+              :remove-action="false"
+            />
+          </div>
+        </div>
+      </div>            
     </div>
+    
     
   </div>
 </template>
@@ -75,69 +65,30 @@ import MembreList from '@/entities/membre/MembreList.vue'
 
 const route = useRoute()
 const pathId = Number(route.params.id)
-
 const { getSecteurById, goToListView } = useSecteurs()
 const entity = ref<Secteur | null>(null)
-
 
 const {
   membres,
   getAllMembresBySecteurId,
   message: membreMessage,
   getPaginationData: membreGetPaginationData,
-  visibleListFields: membreVisibleListFields,
-  loadColumnConfig: loadMembreColumnConfig,
-  saveColumnConfig: saveMembreColumnConfig,
 } = useMembres()
-
 const getMembresData = async (
   unpagined: boolean,
   filters: Record<string, unknown>,
   pagination: PaginationRequestParameter,
   sortFields: SortFieldParameter[],
 ) => {
-  return await getAllMembresBySecteurId(
-    pathId,
-    unpagined,
-    pagination,
-    sortFields
-  )
+  return await getAllMembresBySecteurId(pathId, unpagined, pagination, sortFields)
 }
-
-const membreSearchFields = ref<EntitySearchField[]>(
-  Membre.getAllSearchFieldsMetadata()
-)
-
-const membreEntity = ref<Record<string, unknown>>({
-  idsecteurSecteurs: pathId
-})
-
-const handleUpdateMembreVisibleFields = async (
-  newFields: string[]
-) => {
-  const result = await saveMembreColumnConfig(newFields)
-
-  if (!result.success) {
-    console.error(
-      'Échec de la sauvegarde de la configuration des colonnes Membre:',
-      result.error
-    )
-  }
-}
-
-
+const membreSearchFields = ref<EntitySearchField[]>(Membre.getAllSearchFieldsMetadata())
+const membreEntity = ref<Record<string, unknown>>({ idsecteurSecteurs: pathId })
 
 onMounted(async () => {
   const result = await getSecteurById(pathId)
   entity.value = result.data || null
-
-  
-  await Promise.all([
-    loadMembreColumnConfig(),
-    
-  ])
-  
-})
+});
 
 </script>
 <style scoped></style>

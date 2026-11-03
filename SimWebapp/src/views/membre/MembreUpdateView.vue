@@ -13,10 +13,12 @@
     </div>
 
     <!-- Form -->
-    <div v-if="entity&& activitesMembreLoaded&& rendezVouLoaded&& sujetsMembreLoaded">
+    <div v-if="entity&& activitesMembreLoaded&& ciblesOffreLoaded&& offreLoaded&& rendezVouLoaded&& sujetsMembreLoaded">
       <membre-form
         :membre="entity"
         :activitesMembresData="activitesMembres"
+        :ciblesOffresData="ciblesOffres"
+        :offresData="offres"
         :rendezVousData="rendezVous"
         :sujetsMembresData="sujetsMembres"
         
@@ -50,6 +52,10 @@ import LeftArrowIcon from '@/components/icons/LeftArrowIcon.vue'
 import { useFreezeScreenStore } from '@/stores/useFreezeScreenStore.ts'
 import { useActivitesMembres } from '@/composables/useActivitesMembres'
 import { ActivitesMembreFormDTO } from '@/models/ActivitesMembreModel'
+import { useCiblesOffres } from '@/composables/useCiblesOffres'
+import { CiblesOffreFormDTO } from '@/models/CiblesOffreModel'
+import { useOffres } from '@/composables/useOffres'
+import { OffreFormDTO } from '@/models/OffreModel'
 import { useRendezVous } from '@/composables/useRendezVous'
 import { RendezVouFormDTO } from '@/models/RendezVouModel'
 import { useSujetsMembres } from '@/composables/useSujetsMembres'
@@ -74,6 +80,28 @@ const loadActivitesMembres = async () => {
   } catch (error) {
     console.error('Error loading membre with details:', error)
     activitesMembreLoaded.value = true // Continuer même en cas d'erreur
+  }
+}
+const { ciblesOffres, getAllCiblesOffresByMembreId } = useCiblesOffres();
+const ciblesOffreLoaded = ref(false);
+const loadCiblesOffres = async () => {
+  try {
+    await getAllCiblesOffresByMembreId(pathId, true, new PaginationRequestParameter(), [])
+    ciblesOffreLoaded.value = true
+  } catch (error) {
+    console.error('Error loading membre with details:', error)
+    ciblesOffreLoaded.value = true // Continuer même en cas d'erreur
+  }
+}
+const { offres, getAllOffresByMembreId } = useOffres();
+const offreLoaded = ref(false);
+const loadOffres = async () => {
+  try {
+    await getAllOffresByMembreId(pathId, true, new PaginationRequestParameter(), [])
+    offreLoaded.value = true
+  } catch (error) {
+    console.error('Error loading membre with details:', error)
+    offreLoaded.value = true // Continuer même en cas d'erreur
   }
 }
 const { rendezVous, getAllRendezVousByMembreId } = useRendezVous();
@@ -103,6 +131,8 @@ const violations = ref<
   | {
     membre: Record<string, string>
     activitesMembres: Record<string, string>[]
+    ciblesOffres: Record<string, string>[]
+    offres: Record<string, string>[]
     rendezVous: Record<string, string>[]
     sujetsMembres: Record<string, string>[]
     
@@ -113,6 +143,8 @@ const violations = ref<
 const updateHandler = async (payload: {
   membre: Partial<MembreFormDTO>
   activitesMembres: ActivitesMembreFormDTO[]
+  ciblesOffres: CiblesOffreFormDTO[]
+  offres: OffreFormDTO[]
   rendezVous: RendezVouFormDTO[]
   sujetsMembres: SujetsMembreFormDTO[]
   
@@ -122,6 +154,8 @@ const updateHandler = async (payload: {
   violations.value = {
     membre: {},
     activitesMembres: [],
+    ciblesOffres: [],
+    offres: [],
     rendezVous: [],
     sujetsMembres: [],
     
@@ -134,6 +168,8 @@ const updateHandler = async (payload: {
       violations.value = errors as {
         membre: Record<string, string>
         activitesMembres: Record<string, string>[]
+      ciblesOffres: Record<string, string>[]
+      offres: Record<string, string>[]
       rendezVous: Record<string, string>[]
       sujetsMembres: Record<string, string>[]
       
@@ -163,6 +199,8 @@ onMounted(async () => {
   if (result.data){
       entity.value = result.data
       await loadActivitesMembres()
+      await loadCiblesOffres()
+      await loadOffres()
       await loadRendezVous()
       await loadSujetsMembres()
       

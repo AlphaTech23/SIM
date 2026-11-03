@@ -1,29 +1,83 @@
 {
-  "activitesmembre" : {
-    "list" : [ "id" ]
+"activites": {
+    "list": ["id", "libele", "description"],
+    "detail": ["id", "libele", "description"]
   },
-  "v_rendez_vous_annules" : {
-    "list" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ],
-    "detail" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ]
+"activites_membres": {
+    "list": ["id", "idmembreMembres", "idactiviteActivites"],
+    "detail": ["id", "idmembreMembres", "idactiviteActivites"]
   },
-  "v_rendez_vous_acceptes" : {
-    "list" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ],
-    "detail" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ]
+"choix_horaire_demandeur": {
+    "list": ["id", "idrendezvousRendezVous", "dateChoix"],
+    "detail": ["id", "idrendezvousRendezVous", "dateChoix"]
   },
-  "v_rendez_vous" : {
-    "list" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ],
-    "detail" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ]
+"cibles_offres": {
+    "list": ["id", "idoffreOffres", "idmembreMembres", "dateEnvoi"],
+    "detail": ["id", "idoffreOffres", "idmembreMembres", "dateEnvoi"]
   },
-  "v_rendez_vous_refuses" : {
-    "list" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ],
-    "detail" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ]
+"histo_offres": {
+    "list": ["id", "idoffreOffres", "idstatutoffreStatutOffres", "date", "remarque"],
+    "detail": ["id", "idoffreOffres", "idstatutoffreStatutOffres", "date", "remarque"]
   },
-  "v_rendez_vous_en_attente" : {
-    "list" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ],
-    "detail" : [ "idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux" ]
+"membres": {
+    "list": ["id", "idsecteurSecteurs", "intitule", "logo", "telephone", "email", "whatsapp", "adresse"],
+    "detail": ["id", "idsecteurSecteurs", "intitule", "logo", "telephone", "email", "whatsapp", "adresse"]
   },
-  "membres" : {
-    "list" : [ "id", "idsecteurSecteurs", "intitule", "logo", "telephone", "email", "whatsapp", "adresse" ],
-    "detail" : [ "id", "idsecteurSecteurs", "intitule", "logo", "telephone", "email", "whatsapp", "adresse" ]
+"offres": {
+    "list": ["id", "idtypeoffreTypeOffres", "idmembreMembres", "titreOffre", "descriptions", "conditions", "dateCreation", "dateFinValidite"],
+    "detail": ["id", "idtypeoffreTypeOffres", "idmembreMembres", "titreOffre", "descriptions", "conditions", "dateCreation", "dateFinValidite"]
+  },
+"rendez_vous": {
+    "list": ["id", "iddemandeurMembres", "idreceveurSujetsMembres", "contexte", "dateRdv"],
+    "detail": ["id", "iddemandeurMembres", "idreceveurSujetsMembres", "contexte", "dateRdv"]
+  },
+"secteurs": {
+    "list": ["id", "libele", "description"],
+    "detail": ["id", "libele", "description"]
+  },
+"statut": {
+    "list": ["id", "libele"],
+    "detail": ["id", "libele"]
+  },
+"statut_offres": {
+    "list": ["id", "libele"],
+    "detail": ["id", "libele"]
+  },
+"statut_rendez_vous": {
+    "list": ["id", "idrendezvousRendezVous", "idstatutStatut", "date", "remarque"],
+    "detail": ["id", "idrendezvousRendezVous", "idstatutStatut", "date", "remarque"]
+  },
+"sujets": {
+    "list": ["id", "libele", "description", "nom", "prenom", "fonction", "telephone", "email", "whatsapp", "adresse"],
+    "detail": ["id", "libele", "description", "nom", "prenom", "fonction", "telephone", "email", "whatsapp", "adresse"]
+  },
+"sujets_membres": {
+    "list": ["id", "idmembreMembres", "idsujetSujets"],
+    "detail": ["id", "idmembreMembres", "idsujetSujets"]
+  },
+"type_offres": {
+    "list": ["id", "libele"],
+    "detail": ["id", "libele"]
+  },
+"v_rendez_vous": {
+    "list": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"],
+    "detail": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"]
+  },
+"v_rendez_vous_acceptes": {
+    "list": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"],
+    "detail": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"]
+  },
+"v_rendez_vous_annules": {
+    "list": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"],
+    "detail": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"]
+  },
+"v_rendez_vous_en_attente": {
+    "list": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"],
+    "detail": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"]
+  },
+"v_rendez_vous_refuses": {
+    "list": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"],
+    "detail": ["idRendezVous", "idDemandeur", "membreDemandeur", "logoDemandeur", "telephoneMembreDemandeur", "emailMembreDemandeur", "whatsappMembreDemandeur", "adresseMembreDemandeur", "idSecteurDemandeur", "secteurDemandeur", "descriptionSecteurDemandeur", "idReceveur", "idSujetReceveur", "libeleSujetReceveur", "descriptionSujetReceveur", "nomReceveur", "prenomReceveur", "fonctionReceveur", "telephoneReceveur", "emailReceveur", "whatsappReceveur", "adresseReceveur", "idMembreReceveur", "membreReceveur", "logoReceveur", "telephoneMembreReceveur", "emailMembreReceveur", "whatsappMembreReceveur", "adresseMembreReceveur", "idSecteurReceveur", "secteurReceveur", "descriptionSecteurReceveur", "contexte", "dateRdv", "idStatut", "statut", "dateChangementStatut", "remarque", "historiqueStatuts", "creneaux"]
   }
+
 }

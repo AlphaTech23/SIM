@@ -7,6 +7,8 @@ import { PaginationRequestParameter, SortFieldParameter } from '@/models/api/Req
 import { PaginationData } from '@/models/api/PageResponseModel'
 import { useRouter } from 'vue-router'
 import { ActivitesMembre, ActivitesMembreFormDTO } from '@/models/ActivitesMembreModel'
+import { CiblesOffre, CiblesOffreFormDTO } from '@/models/CiblesOffreModel'
+import { Offre, OffreFormDTO } from '@/models/OffreModel'
 import { RendezVou, RendezVouFormDTO } from '@/models/RendezVouModel'
 import { SujetsMembre, SujetsMembreFormDTO } from '@/models/SujetsMembreModel'
 
@@ -132,14 +134,16 @@ export function useMembres() {
    * Create a new membre
    * @param fullData Object containing membre and his details
    */
-  const createMembre = async (fullData: { membre: Partial<MembreFormDTO>; activitesMembres: ActivitesMembreFormDTO[]; rendezVous: RendezVouFormDTO[]; sujetsMembres: SujetsMembreFormDTO[] })=> {
+  const createMembre = async (fullData: { membre: Partial<MembreFormDTO>; activitesMembres: ActivitesMembreFormDTO[]; ciblesOffres: CiblesOffreFormDTO[]; offres: OffreFormDTO[]; rendezVous: RendezVouFormDTO[]; sujetsMembres: SujetsMembreFormDTO[] })=> {
     const dto = new MembreFormDTO(fullData.membre)
     const membre: Partial<Membre> = await dto.toEntity()
     const activitesMembres: Partial<ActivitesMembre>[] = await ActivitesMembreFormDTO.toEntities(fullData.activitesMembres)
+    const ciblesOffres: Partial<CiblesOffre>[] = await CiblesOffreFormDTO.toEntities(fullData.ciblesOffres)
+    const offres: Partial<Offre>[] = await OffreFormDTO.toEntities(fullData.offres)
     const rendezVous: Partial<RendezVou>[] = await RendezVouFormDTO.toEntities(fullData.rendezVous)
     const sujetsMembres: Partial<SujetsMembre>[] = await SujetsMembreFormDTO.toEntities(fullData.sujetsMembres)
     
-    const { data, error, errors } = await membreService.create({ membre, activitesMembres, rendezVous, sujetsMembres })
+    const { data, error, errors } = await membreService.create({ membre, activitesMembres, ciblesOffres, offres, rendezVous, sujetsMembres })
     if (error) {
       message.value = error
     }
@@ -155,7 +159,7 @@ export function useMembres() {
     id: number | string,
     fullData: {
       membre: Partial<MembreFormDTO>
-      ; activitesMembres: ActivitesMembreFormDTO[]; rendezVous: RendezVouFormDTO[]; sujetsMembres: SujetsMembreFormDTO[] 
+      ; activitesMembres: ActivitesMembreFormDTO[]; ciblesOffres: CiblesOffreFormDTO[]; offres: OffreFormDTO[]; rendezVous: RendezVouFormDTO[]; sujetsMembres: SujetsMembreFormDTO[] 
     },
   ) => {
     const dto = new MembreFormDTO(fullData.membre)
@@ -163,6 +167,12 @@ export function useMembres() {
 
     const activitesMembres: Partial<ActivitesMembre>[] = await ActivitesMembreFormDTO.toEntities(
       fullData.activitesMembres,
+    )
+    const ciblesOffres: Partial<CiblesOffre>[] = await CiblesOffreFormDTO.toEntities(
+      fullData.ciblesOffres,
+    )
+    const offres: Partial<Offre>[] = await OffreFormDTO.toEntities(
+      fullData.offres,
     )
     const rendezVous: Partial<RendezVou>[] = await RendezVouFormDTO.toEntities(
       fullData.rendezVous,
@@ -176,6 +186,8 @@ export function useMembres() {
     { 
       membre
       , activitesMembres
+      , ciblesOffres
+      , offres
       , rendezVous
       , sujetsMembres
        

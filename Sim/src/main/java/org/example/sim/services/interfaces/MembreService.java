@@ -2,6 +2,8 @@ package org.example.sim.services.interfaces;
 
 import org.example.sim.models.Membre;
 import org.example.sim.models.ActivitesMembre;
+import org.example.sim.models.CiblesOffre;
+import org.example.sim.models.Offre;
 import org.example.sim.models.RendezVou;
 import org.example.sim.models.SujetsMembre;
 
@@ -29,7 +31,7 @@ public interface MembreService {
     void deleteMembre(Integer id);
     
 
-    Membre createFullMembre(Membre membre,List<ActivitesMembre> activitesMembres,List<RendezVou> rendezVous,List<SujetsMembre> sujetsMembres);
-    Membre updateFullMembre(Integer id, Membre membre,List<ActivitesMembre> activitesMembres,List<RendezVou> rendezVous,List<SujetsMembre> sujetsMembres);
+    Membre createFullMembre(Membre membre,List<ActivitesMembre> activitesMembres,List<CiblesOffre> ciblesOffres,List<Offre> offres,List<RendezVou> rendezVous,List<SujetsMembre> sujetsMembres);
+    Membre updateFullMembre(Integer id, Membre membre,List<ActivitesMembre> activitesMembres,List<CiblesOffre> ciblesOffres,List<Offre> offres,List<RendezVou> rendezVous,List<SujetsMembre> sujetsMembres);
     void deleteFullMembre(Integer id);
 }

@@ -18,11 +18,7 @@
       </GenesisButton>
     </div>
     <!-- Entity details -->
-    <RendezVouDetails
-      v-if="entity"
-      :rendezVou="entity"
-    />
-
+    <RendezVouDetails v-if="entity" :rendezVou="entity" />
     
   </div>
 </template>
@@ -38,18 +34,13 @@ import LeftArrowIcon from '@/components/icons/LeftArrowIcon.vue'
 
 const route = useRoute()
 const pathId = Number(route.params.id)
-
 const { getRendezVouById, goToListView } = useRendezVous()
 const entity = ref<RendezVou | null>(null)
-
-
 
 onMounted(async () => {
   const result = await getRendezVouById(pathId)
   entity.value = result.data || null
-
-  
-})
+});
 
 </script>
 <style scoped></style>

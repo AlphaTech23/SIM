@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Setter
 @Getter
@@ -118,11 +121,11 @@ public class VRendezVousRefuse  {
 	@Size(max = 2147483647)
 	private String remarque;
 	@Column(name="historique_statuts", unique = false, nullable = true)
-	@org.hibernate.annotations.ColumnTransformer(read = "CAST(historique_statuts as varchar)", write = "CAST(? as jsonb)")
-	private String historiqueStatuts;
+	@JdbcTypeCode(SqlTypes.JSON)
+	private JsonNode historiqueStatuts;
 	@Column(name="creneaux", unique = false, nullable = true)
-	@org.hibernate.annotations.ColumnTransformer(read = "CAST(creneaux as varchar)", write = "CAST(? as jsonb)")
-	private String creneaux;
+	@JdbcTypeCode(SqlTypes.JSON)
+	private JsonNode creneaux;
 	
 
 }

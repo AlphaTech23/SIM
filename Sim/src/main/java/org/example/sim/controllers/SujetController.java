@@ -53,6 +53,7 @@ private final SujetsMembreService sujetsmembreService;
 
 	@Operation(
 	    summary = "Retrieve all sujet",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of sujet items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -102,6 +103,7 @@ private final SujetsMembreService sujetsmembreService;
 	}
 	@Operation(
 	    summary = "Retrieve all sujet",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of sujet items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -152,6 +154,7 @@ private final SujetsMembreService sujetsmembreService;
 	}
 	@Operation(
 	    summary = "Get sujet by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific sujet item by its ID"
 	)
 	@ApiResponses({
@@ -204,6 +207,7 @@ private final SujetsMembreService sujetsmembreService;
 
 	@Operation(
 	    summary = "Create new sujet",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
 	    description = "Create a new sujet and its details. The operation is atomic: all or nothing."
 	)
@@ -272,6 +276,7 @@ private final SujetsMembreService sujetsmembreService;
  
 	@Operation(
 	    summary = "Update existing sujet",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
           description = "Update an existing sujet and its details. The operation is atomic: all or nothing."
       )
@@ -369,6 +374,7 @@ private final SujetsMembreService sujetsmembreService;
 
 	@Operation(
 	    summary = "Delete sujet",
+	    security = { @SecurityRequirement(name = "bearerAuth") },    
 
           description = "Delete an existing sujet and all its associated details. The operation is atomic: all or nothing."
       )
@@ -419,6 +425,7 @@ private final SujetsMembreService sujetsmembreService;
 
 @Operation(
   summary = "Get sujetsMembres attached with a sujet ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
   description = "Retrieve a list of sujetsMembres from a sujet item ID"
 )
 @ApiResponses({

@@ -10,7 +10,6 @@ const props = defineProps<{
   internalId: number
   statutRendezVou: StatutRendezVou
   violations?: Record<string, string> | null
-  parentClassName?: string
 }>()
 
 const emit = defineEmits<{
@@ -20,20 +19,10 @@ const emit = defineEmits<{
 
 const formModel = ref<StatutRendezVouFormDTO>(StatutRendezVouFormDTO.parse(props.statutRendezVou))
 
-
-// Masque la FK correspondant au parent courant (résolu à l'exécution via parentClassName)
-const isParentFK = (fkType: string) => !!props.parentClassName && fkType === props.parentClassName
-
 const idrendezvousRendezVousSearchField = StatutRendezVou.getSearchFieldByKey('idrendezvousRendezVous')
-// getKeyValue() = identifiant de la FK (attendu par le select), et non getReferenceValue() = libellé
 const idrendezvousRendezVousDefaultValue = props.statutRendezVou
-  ? (props.statutRendezVou?.idrendezvousRendezVous?.getKeyValue?.() ?? undefined)
-  : undefined
-const idstatutStatutSearchField = StatutRendezVou.getSearchFieldByKey('idstatutStatut')
-// getKeyValue() = identifiant de la FK (attendu par le select), et non getReferenceValue() = libellé
-const idstatutStatutDefaultValue = props.statutRendezVou
-  ? (props.statutRendezVou?.idstatutStatut?.getKeyValue?.() ?? undefined)
-  : undefined
+? (props.statutRendezVou?.idrendezvousRendezVous?.getReferenceValue?.() ?? undefined)
+: undefined      
 
 
 function removeRow() {
@@ -56,7 +45,7 @@ onMounted(() => {
     <td>
       {{ internalId }}
     </td>
-    <td v-if="!isParentFK('RendezVou')">
+    <td>
       <GenesisSelectSearchCriteria
         v-if="idrendezvousRendezVousSearchField?.multicriteriaSelect"
         :violation="violations ? violations['idrendezvousRendezVous'] : undefined"
@@ -68,24 +57,6 @@ onMounted(() => {
         @option-selected="
           (selectedValue) => {
             formModel.idrendezvousRendezVous = String(selectedValue)
-            updateModel()
-          }
-        "
-      />
-    </td>
-    
-    <td v-if="!isParentFK('Statut')">
-      <GenesisSelectSearchCriteria
-        v-if="idstatutStatutSearchField?.multicriteriaSelect"
-        :violation="violations ? violations['idstatutStatut'] : undefined"
-        placeholder="Select Idstatut statut"
-        key="StatutRendezVouIdstatutStatut"
-        :search-function="idstatutStatutSearchField?.multicriteriaSelect.searchFunction"
-        :filters="idstatutStatutSearchField?.multicriteriaSelect.filters"
-        :default-value="idstatutStatutDefaultValue"
-        @option-selected="
-          (selectedValue) => {
-            formModel.idstatutStatut = String(selectedValue)
             updateModel()
           }
         "

@@ -19,6 +19,12 @@ import org.example.sim.services.interfaces.MembreService;
 import org.example.sim.services.interfaces.ActivitesMembreService;
 import org.example.sim.models.dto.ActivitesMembreSearch;
 import org.example.sim.models.ActivitesMembre;
+import org.example.sim.services.interfaces.CiblesOffreService;
+import org.example.sim.models.dto.CiblesOffreSearch;
+import org.example.sim.models.CiblesOffre;
+import org.example.sim.services.interfaces.OffreService;
+import org.example.sim.models.dto.OffreSearch;
+import org.example.sim.models.Offre;
 import org.example.sim.services.interfaces.RendezVouService;
 import org.example.sim.models.dto.RendezVouSearch;
 import org.example.sim.models.RendezVou;
@@ -49,13 +55,17 @@ import java.util.List;
 public class MembreController  {
 	private final MembreService membreService;
 private final ActivitesMembreService activitesmembreService;
+private final CiblesOffreService ciblesoffreService;
+private final OffreService offreService;
 private final RendezVouService rendezvouService;
 private final SujetsMembreService sujetsmembreService;
 
 
-	public MembreController(MembreService membreService, ActivitesMembreService activitesmembreService, RendezVouService rendezvouService, SujetsMembreService sujetsmembreService) {
+	public MembreController(MembreService membreService, ActivitesMembreService activitesmembreService, CiblesOffreService ciblesoffreService, OffreService offreService, RendezVouService rendezvouService, SujetsMembreService sujetsmembreService) {
 	   this.membreService = membreService;
 	this.activitesmembreService = activitesmembreService;
+	this.ciblesoffreService = ciblesoffreService;
+	this.offreService = offreService;
 	this.rendezvouService = rendezvouService;
 	this.sujetsmembreService = sujetsmembreService;
 	
@@ -63,6 +73,7 @@ private final SujetsMembreService sujetsmembreService;
 
 	@Operation(
 	    summary = "Retrieve all membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of membre items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -112,6 +123,7 @@ private final SujetsMembreService sujetsmembreService;
 	}
 	@Operation(
 	    summary = "Retrieve all membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 	    description = "Get a paginated and sorted list of membre items. Returns an empty list if no data is found."
 	)
 	@ApiResponses({
@@ -162,6 +174,7 @@ private final SujetsMembreService sujetsmembreService;
 	}
 	@Operation(
 	    summary = "Get membre by ID",
+	    security = { @SecurityRequirement(name = "bearerAuth") },      
 	    description = "Retrieve a specific membre item by its ID"
 	)
 	@ApiResponses({
@@ -214,6 +227,7 @@ private final SujetsMembreService sujetsmembreService;
 
 	@Operation(
 	    summary = "Create new membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
 	    description = "Create a new membre and its details. The operation is atomic: all or nothing."
 	)
@@ -234,7 +248,7 @@ private final SujetsMembreService sujetsmembreService;
 	})
 	@PostMapping
 	public ResponseEntity<?> createFullMembre(
-	    @Parameter(description = "Membre object to be created with activitesMembres{{#unless @last}}, {{/unless}}rendezVous{{#unless @last}}, {{/unless}}sujetsMembres{{#unless @last}}, {{/unless}}", required = true)
+	    @Parameter(description = "Membre object to be created with activitesMembres{{#unless @last}}, {{/unless}}ciblesOffres{{#unless @last}}, {{/unless}}offres{{#unless @last}}, {{/unless}}rendezVous{{#unless @last}}, {{/unless}}sujetsMembres{{#unless @last}}, {{/unless}}", required = true)
 	    @RequestBody @Valid MembreFullDto dto,
 	    BindingResult bindingResult
 	) {
@@ -252,10 +266,12 @@ private final SujetsMembreService sujetsmembreService;
 	  try {
 	    Membre membre = dto.getMembre();
 	    List<ActivitesMembre> activitesMembres = dto.getActivitesMembres();
+	    List<CiblesOffre> ciblesOffres = dto.getCiblesOffres();
+	    List<Offre> offres = dto.getOffres();
 	    List<RendezVou> rendezVous = dto.getRendezVous();
 	    List<SujetsMembre> sujetsMembres = dto.getSujetsMembres();
 	    
-	    Membre createdMembre = membreService.createFullMembre(membre, activitesMembres, rendezVous, sujetsMembres);
+	    Membre createdMembre = membreService.createFullMembre(membre, activitesMembres, ciblesOffres, offres, rendezVous, sujetsMembres);
 	    RestResponse<Membre> response = RestResponse.buildSuccessResponse(
 	      HttpStatus.CREATED,
 	      "Membre and its details created successfully (Atomic operation)",
@@ -284,6 +300,7 @@ private final SujetsMembreService sujetsmembreService;
  
 	@Operation(
 	    summary = "Update existing membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },
 
           description = "Update an existing membre and its details. The operation is atomic: all or nothing."
       )
@@ -310,7 +327,7 @@ private final SujetsMembreService sujetsmembreService;
     public ResponseEntity<?> updateFullMembre(
       @Parameter(description = "ID of the membre to update", required = true)
       @PathVariable Integer id,
-      @Parameter(description = "Updated membre object with activitesMembres{{#unless @last}}, {{/unless}}rendezVous{{#unless @last}}, {{/unless}}sujetsMembres{{#unless @last}}, {{/unless}}", required = true)
+      @Parameter(description = "Updated membre object with activitesMembres{{#unless @last}}, {{/unless}}ciblesOffres{{#unless @last}}, {{/unless}}offres{{#unless @last}}, {{/unless}}rendezVous{{#unless @last}}, {{/unless}}sujetsMembres{{#unless @last}}, {{/unless}}", required = true)
       @RequestBody @Valid MembreFullDto dto,
       BindingResult bindingResult
     ) {
@@ -340,12 +357,14 @@ private final SujetsMembreService sujetsmembreService;
         
         Membre membre = dto.getMembre();
         List<ActivitesMembre> activitesMembres = dto.getActivitesMembres();
+        List<CiblesOffre> ciblesOffres = dto.getCiblesOffres();
+        List<Offre> offres = dto.getOffres();
         List<RendezVou> rendezVous = dto.getRendezVous();
         List<SujetsMembre> sujetsMembres = dto.getSujetsMembres();
         
         
         Membre updatedMembre = membreService.updateFullMembre(
-            id, membre, activitesMembres, rendezVous, sujetsMembres
+            id, membre, activitesMembres, ciblesOffres, offres, rendezVous, sujetsMembres
         );
         
         RestResponse<Membre> response = RestResponse.buildSuccessResponse(
@@ -383,6 +402,7 @@ private final SujetsMembreService sujetsmembreService;
 
 	@Operation(
 	    summary = "Delete membre",
+	    security = { @SecurityRequirement(name = "bearerAuth") },    
 
           description = "Delete an existing membre and all its associated details. The operation is atomic: all or nothing."
       )
@@ -433,6 +453,7 @@ private final SujetsMembreService sujetsmembreService;
 
 @Operation(
   summary = "Get activitesMembres attached with a membre ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
   description = "Retrieve a list of activitesMembres from a membre item ID"
 )
 @ApiResponses({
@@ -501,7 +522,148 @@ try {
 }
 }
 @Operation(
+  summary = "Get ciblesOffres attached with a membre ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
+  description = "Retrieve a list of ciblesOffres from a membre item ID"
+)
+@ApiResponses({
+  @ApiResponse(
+    responseCode = "200",
+    description = "CiblesOffres retrieved successfully",
+    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RestResponse.class))
+  ),
+  @ApiResponse(
+    responseCode = "404",
+    description = "Membre not found with the provided ID"
+  ),
+  @ApiResponse(
+    responseCode = "500",
+    description = "Internal server error"
+  )
+})
+@GetMapping("/{id}/ciblesoffres")
+public ResponseEntity<?> getCiblesOffresByMembre(
+  @Parameter(description = "ID of the membre to retrieve", required = true)
+  @PathVariable Integer id,
+  @Parameter(description = "Page number (0-indexed)", required = false)
+  @RequestParam(defaultValue = "0") int page,
+  @Parameter(description = "Size of the page", required = false)
+  @RequestParam(defaultValue = "10") int size,
+  @Parameter(description = "Sort order", required = false)
+  @RequestParam(defaultValue = "id,asc", required = false) String sortParam
+) {
+try {
+  Membre membre = membreService.getMembreById(id);
+  if (membre == null) {
+    RestResponse<String> errorResponse = RestResponse.buildErrorResponse(
+      HttpStatus.NOT_FOUND,
+      String.format("Membre not found with id: %s", id),
+      null
+    );
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+  }
+  Sort sortObj = WebUtils.createSortObject(sortParam);
+  Pageable pageable = PageRequest.of(page, size, sortObj);
+  CiblesOffreSearch object = new CiblesOffreSearch();
+  object.setIdmembreMembres(membre);
+  
+  Page<CiblesOffre> ciblesOffresData = ciblesoffreService.getAllCiblesOffre(pageable, object);
+  
+  RestResponse<Page<CiblesOffre>> response = RestResponse.buildSuccessResponse(
+    HttpStatus.OK,
+    "CiblesOffres retrieved successfully",
+    ciblesOffresData
+  );
+  return ResponseEntity.ok(response);
+} catch (ResourceNotFoundException ex) {
+  RestResponse<String> errorResponse = RestResponse.buildErrorResponse(
+    HttpStatus.NOT_FOUND,
+    ex.getMessage(),
+    null
+  );
+  return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+} catch (Exception ex) {
+  RestResponse<String> errorResponse = RestResponse.buildErrorResponse(
+    HttpStatus.INTERNAL_SERVER_ERROR,
+    String.format("Error while retrieving membre: %s", ex.getMessage()),
+    null
+  );
+  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+}
+}
+@Operation(
+  summary = "Get offres attached with a membre ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
+  description = "Retrieve a list of offres from a membre item ID"
+)
+@ApiResponses({
+  @ApiResponse(
+    responseCode = "200",
+    description = "Offres retrieved successfully",
+    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RestResponse.class))
+  ),
+  @ApiResponse(
+    responseCode = "404",
+    description = "Membre not found with the provided ID"
+  ),
+  @ApiResponse(
+    responseCode = "500",
+    description = "Internal server error"
+  )
+})
+@GetMapping("/{id}/offres")
+public ResponseEntity<?> getOffresByMembre(
+  @Parameter(description = "ID of the membre to retrieve", required = true)
+  @PathVariable Integer id,
+  @Parameter(description = "Page number (0-indexed)", required = false)
+  @RequestParam(defaultValue = "0") int page,
+  @Parameter(description = "Size of the page", required = false)
+  @RequestParam(defaultValue = "10") int size,
+  @Parameter(description = "Sort order", required = false)
+  @RequestParam(defaultValue = "id,asc", required = false) String sortParam
+) {
+try {
+  Membre membre = membreService.getMembreById(id);
+  if (membre == null) {
+    RestResponse<String> errorResponse = RestResponse.buildErrorResponse(
+      HttpStatus.NOT_FOUND,
+      String.format("Membre not found with id: %s", id),
+      null
+    );
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+  }
+  Sort sortObj = WebUtils.createSortObject(sortParam);
+  Pageable pageable = PageRequest.of(page, size, sortObj);
+  OffreSearch object = new OffreSearch();
+  object.setIdmembreMembres(membre);
+  
+  Page<Offre> offresData = offreService.getAllOffre(pageable, object);
+  
+  RestResponse<Page<Offre>> response = RestResponse.buildSuccessResponse(
+    HttpStatus.OK,
+    "Offres retrieved successfully",
+    offresData
+  );
+  return ResponseEntity.ok(response);
+} catch (ResourceNotFoundException ex) {
+  RestResponse<String> errorResponse = RestResponse.buildErrorResponse(
+    HttpStatus.NOT_FOUND,
+    ex.getMessage(),
+    null
+  );
+  return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+} catch (Exception ex) {
+  RestResponse<String> errorResponse = RestResponse.buildErrorResponse(
+    HttpStatus.INTERNAL_SERVER_ERROR,
+    String.format("Error while retrieving membre: %s", ex.getMessage()),
+    null
+  );
+  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+}
+}
+@Operation(
   summary = "Get rendezVous attached with a membre ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
   description = "Retrieve a list of rendezVous from a membre item ID"
 )
 @ApiResponses({
@@ -571,6 +733,7 @@ try {
 }
 @Operation(
   summary = "Get sujetsMembres attached with a membre ID",
+  security = { @SecurityRequirement(name = "bearerAuth") },
   description = "Retrieve a list of sujetsMembres from a membre item ID"
 )
 @ApiResponses({
