@@ -7,12 +7,9 @@ const authRoutes: Array<RouteRecordRaw> = [
     component: () => import('@/views/auth/LoginView.vue'),
     meta: { requiresAuth: false },
   },
-  {
-    path: 'register',
-    name: 'register',
-    component: () => import('@/views/auth/RegisterView.vue'),
-    meta: { requiresAuth: false },
-  },
+  // Inscription retiree de l'interface : la creation de compte se fait
+  // uniquement via Swagger ou Postman, par un administrateur deja connecte.
+  // Les composants RegisterView/RegisterForm sont conserves si besoin de retour.
 ]
 
 export default authRoutes

@@ -1,6 +1,11 @@
 --Default login
---Username: admin
---Password: admin
+--Username: SIM
+--Password: S26IM
+--
+--Le mot de passe est stocke hache en bcrypt (BCryptPasswordEncoder, force 10),
+--jamais en clair. Pour le changer, regenerer un hash avec le meme encodeur :
+--  new BCryptPasswordEncoder().encode("nouveauMotDePasse")
+--puis remplacer la valeur ci-dessous.
 
 CREATE TABLE IF NOT EXISTS roles
 (
@@ -21,7 +26,7 @@ INSERT INTO roles (name) VALUES ('ROLE_ADMIN')
 ON CONFLICT (name) DO NOTHING;
 
 INSERT INTO users (name, email, password, role_id)
-VALUES ('admin', 'admin@user.com', '$2a$10$GBvWdFZht2UZ8eOEXnLv.e/txUqjTUVnyotHTEtA.V9SAwVs6sgTS', 1)
+VALUES ('SIM', 'sim@user.com', '$2a$10$1fJ1.n4GAf9XMW5tl.ZCnOKBcYhr3Pdtc9J2eO9ondqytQPnws/rS', 1)
 ON CONFLICT (email) DO NOTHING;
 
 

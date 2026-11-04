@@ -188,6 +188,9 @@ public class UserAuthController {
 
   @Operation(
       summary = "User login",
+      // security = {} annule l'exigence globale de SwaggerConfig : c'est l'unique
+      // point d'entree appelable sans jeton, puisqu'il sert a en obtenir un.
+      security = {},
       description = "Authenticate user and generate JWT token"
   )
   @ApiResponses({
@@ -226,6 +229,9 @@ public class UserAuthController {
 
   @Operation(
       summary = "Refresh access token",
+      // Appelable sans en-tete Authorization : c'est le jeton envoye dans le corps
+      // de la requete qui fait foi, et il doit rester utilisable apres expiration.
+      security = {},
       description = "Provide the current access-token to obtain a new one; the old one is invalidated."
   )
   @ApiResponses({

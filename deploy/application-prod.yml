@@ -1,0 +1,67 @@
+# Profil production. A deposer dans /opt/sim/config/application-prod.yml
+# Secrets fournis par l'environnement (voir sim-backend.service), jamais en dur ici.
+spring:
+  application:
+    name: sim
+
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/SIM
+    username: ${SIM_DB_USER}
+    password: ${SIM_DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 10
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.format_sql: false
+    open-in-view: false
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: 8080
+  address: 127.0.0.1        # jamais expose directement : nginx fait le relais
+  servlet:
+    context-path: /sim
+  forward-headers-strategy: native
+  shutdown: graceful
+
+# TRACE en prod remplit le disque et deverse les donnees SQL dans les logs.
+# Spring Boot fusionne les proprietes CLE PAR CLE : il ne suffit pas de baisser
+# 'root', il faut redefinir explicitement chaque cle posee par l'application.yml
+# embarque dans le JAR, sinon son TRACE survit.
+logging:
+  level:
+    root: WARN
+    org.example.sim: INFO
+    # Le handler logue "Resource not found" en INFO AVEC la stack trace complete
+    # (~50 lignes). Une table vide renvoie 404, donc chaque liste en genererait une.
+    # WARN masque ce bruit et conserve tous les log.error() de vraies pannes.
+    org.example.sim.exception.handler: WARN
+    org.hibernate: WARN
+    org.hibernate.SQL: WARN                    # pose a TRACE dans le JAR
+    org.hibernate.orm.jdbc.bind: WARN          # sinon les valeurs des parametres fuient
+    org.springframework: WARN
+  file:
+    name: /var/log/sim/sim.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7
+      total-size-cap: 200MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+app:
+  config:
+    column-visibility:
+      file: /opt/sim/config/column-visibility.json   # chemin absolu : doit etre inscriptible

@@ -6,16 +6,6 @@
       </div>
 
       <LoginForm />
-
-      <div class="mt-6 text-center">
-        <hr class="my-4 border-base-200" />
-        <p class="text-sm text-base-content">
-          {{ $t('authentication.dontHaveAccount') }}
-          <RouterLink to="/auth/register" class="text-primary font-medium hover:underline ml-1">
-            {{ $t('authentication.createAccount') }}
-          </RouterLink>
-        </p>
-      </div>
     </div>
   </div>
 </template>
