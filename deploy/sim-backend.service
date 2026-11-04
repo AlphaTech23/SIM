@@ -1,0 +1,33 @@
+[Unit]
+Description=SIM backend (Spring Boot)
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=sim
+Group=sim
+WorkingDirectory=/opt/sim
+
+# Secrets hors du depot : chmod 600, proprietaire sim
+EnvironmentFile=/etc/sim/sim.env
+
+ExecStart=/usr/bin/java -XX:MaxRAMPercentage=70 \
+  -jar /opt/sim/sim.jar \
+  --spring.profiles.active=prod \
+  --spring.config.additional-location=file:/opt/sim/config/
+
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=143
+TimeoutStopSec=30
+
+# Durcissement
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/sim/config /var/log/sim
+
+[Install]
+WantedBy=multi-user.target
