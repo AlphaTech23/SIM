@@ -6,6 +6,7 @@ import org.example.sim.config.security.models.AuthRequest;
 import org.example.sim.config.security.models.PasswordChangeRequest;
 import org.example.sim.config.security.models.UserUpdateRequest;
 import org.example.sim.config.security.models.RefreshRequest;
+import org.example.sim.config.security.models.UserRegisterRequest;
 import org.example.sim.config.security.services.JwtService;
 import org.example.sim.config.security.services.TokenBlacklistService;
 import org.example.sim.config.security.services.UserInfoService;
@@ -170,8 +171,9 @@ public class UserAuthController {
    )
   })
   @PostMapping("/register")
-  public ResponseEntity<RestResponse<String>> addNewUser(@RequestBody UserEntity user) {
+  public ResponseEntity<RestResponse<String>> addNewUser(@RequestBody UserRegisterRequest userRequest) {
     try {
+      UserEntity user = userRequest.get();
       if (user.getRoleidRoleEntity() == null) {
         var role = roleEntityRepository.findAllByName("ROLE_ADMIN")
         .orElseThrow(() -> new IllegalArgumentException("Default role ROLE_ADMIN not found"));
