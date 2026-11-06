@@ -2,6 +2,7 @@ package org.example.sim.config.security.filters;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.sim.config.security.services.JwtService;
@@ -49,9 +50,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     String username = null;
     String jwt = null;
 
+    boolean swaggerRequest = request.getRequestURI().contains("/swagger-ui/")
+            || request.getRequestURI().contains("/v3/api-docs");
+
     if (authHeader != null && authHeader.startsWith("Bearer ")) {
       jwt = authHeader.substring(7);
+    } else if (swaggerRequest) {
+      // Token transmis initialement dans l'URL
+      jwt = request.getParameter("token");
+      // Sinon, récupération depuis le cookie
+      if (jwt == null && request.getCookies() != null) {
+        for (Cookie cookie : request.getCookies()) {
+          if ("SWAGGER_TOKEN".equals(cookie.getName())) {
+            jwt = cookie.getValue();
+            break;
+          }
+        }
+      }
+    }
 
+    if (jwt != null) {
       // Vérification blacklist
       if (tokenBlacklistService.isTokenInvalidated(jwt)) {
         sendErrorResponse(response,
@@ -79,6 +97,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+              if(swaggerRequest && jwt != null) {
+                  // Création d'un cookie pour stocker le token
+                  Cookie cookie = new Cookie("SWAGGER_TOKEN", jwt);
+                  cookie.setHttpOnly(true);
+                  cookie.setSecure(request.isSecure());
+                  cookie.setPath("/sim");
+                  cookie.setMaxAge(300);
+                  cookie.setAttribute("SameSite", "Strict");
+
+                  response.addCookie(cookie);
+              }
             }
         } catch (Exception e) {
             sendErrorResponse(response, 

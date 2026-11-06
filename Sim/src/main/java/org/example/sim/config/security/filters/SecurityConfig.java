@@ -63,34 +63,43 @@ public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-      .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-      .csrf(AbstractHttpConfigurer::disable)
-      .authorizeHttpRequests(auth -> auth
-          // Strictement le minimum accessible sans jeton.
-          // /auth/login et /auth/refresh doivent rester libres : sans eux, impossible
-          // d'obtenir un premier jeton. Tout le reste de /auth/** est desormais protege,
-          // en particulier /auth/register qui attribuait ROLE_ADMIN a qui le demandait.
-          // La creation de compte passe par Swagger ou Postman, par un admin connecte.
-          .requestMatchers("/auth/login", "/auth/refresh").permitAll()
-          // La page Swagger doit rester joignable, sinon le bouton Authorize serait
-          // inatteignable (on ne peut pas presenter un jeton pour charger la page qui
-          // sert a l'obtenir). En revanche aucune operation n'est utilisable sans jeton.
-          .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/welcome/**").permitAll()
-          // Autoriser ADMIN sur TOUTES les routes via une expression SpEL
-          .anyRequest().access(new WebExpressionAuthorizationManager(
-              "hasAuthority('ROLE_ADMIN')" 
-          ))
-      )
-      .sessionManagement(sess -> sess
-              .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No sessions
-      )
-      .authenticationProvider(authenticationProvider()) // Custom authentication provider
-      .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter
-      .exceptionHandling()
-            .authenticationEntryPoint(authenticationEntryPoint)
-            .accessDeniedHandler(accessDeniedHandler);
-    return http.build();
+      http
+          .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+          .csrf(AbstractHttpConfigurer::disable)
+
+          .authorizeHttpRequests(auth -> auth
+
+              // Routes publiques
+              .requestMatchers("/auth/login", "/auth/refresh").permitAll()
+
+              // Swagger accessible uniquement aux ADMIN
+              .requestMatchers(
+                  "/swagger-ui/**",
+                  "/swagger-ui.html",
+                  "/v3/api-docs/**"
+              ).hasAuthority("ROLE_ADMIN")
+
+              // Toutes les autres routes
+              .anyRequest().hasAuthority("ROLE_ADMIN")
+          )
+
+          .sessionManagement(sess -> sess
+              .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+          )
+
+          .authenticationProvider(authenticationProvider())
+
+          .addFilterBefore(
+              authFilter,
+              UsernamePasswordAuthenticationFilter.class
+          )
+
+          .exceptionHandling(exception -> exception
+              .authenticationEntryPoint(authenticationEntryPoint)
+              .accessDeniedHandler(accessDeniedHandler)
+          );
+
+      return http.build();
   }
 
   @Bean

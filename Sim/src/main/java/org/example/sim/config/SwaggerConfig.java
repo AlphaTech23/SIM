@@ -21,7 +21,6 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
  * localement avec security = {}.
  */
 @Configuration
-@OpenAPIDefinition(security = { @SecurityRequirement(name = "bearerAuth") })
 @SecurityScheme(
     name = "bearerAuth",
     type = SecuritySchemeType.HTTP,
